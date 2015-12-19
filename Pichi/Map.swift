@@ -1,6 +1,6 @@
 //
 //  FromJSONMap.swift
-//  Cingulata
+//  Pichi
 //
 //  Created by Alexander Evsyuchenya on 12/16/15.
 //  Copyright © 2015 baydet. All rights reserved.

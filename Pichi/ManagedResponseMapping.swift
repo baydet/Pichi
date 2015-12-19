@@ -1,6 +1,6 @@
 //
 //  ManagedResponseMapping.swift
-//  Cingulata
+//  Pichi
 //
 //  Created by Alexander Evsyuchenya on 12/18/15.
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
