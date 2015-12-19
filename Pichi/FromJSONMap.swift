@@ -6,7 +6,7 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
-public struct FromJSONMap: nMap {
+public struct FromJSONMap: Map {
     
     private let json: [String : AnyObject]
     

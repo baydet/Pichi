@@ -11,7 +11,7 @@ infix operator <-> {}
 /**
  *  This protocol defines high level abstraction for deserializing objects from JSON
  */
-public protocol nMap {
+public protocol Map {
 	subscript(key: String) -> Self { get }
     func value<T>() -> T?
 
@@ -23,14 +23,14 @@ public protocol nMap {
 /**
  *  Defines object that could be mapped to/from JSON
  */
-public protocol nMappable {
-	init?<T: nMap>(_ map: T)
+public protocol Mappable {
+	init?<T:Map>(_ map: T)
 }
 
 /**
  *  Root class for mapping
  */
-public class Mapping<N: nMappable, T: nMap> {
+public class Mapping<N:Mappable, T:Map> {
 	public typealias MappingFunction = (inout N, T) -> Void
 	let mapFunction: MappingFunction
 

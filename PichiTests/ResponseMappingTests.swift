@@ -9,14 +9,14 @@
 import XCTest
 import Pichi
 
-struct Test: nMappable {
+struct Test: Mappable {
     var string: String = ""
     var optString: String? = ""
     var impString: String! = ""
     var null: String?
     var emptyKey: String?
     
-    init?<T: nMap>(_ map: T) {
+    init?<T:Map>(_ map: T) {
         
     }
     
@@ -30,7 +30,7 @@ struct Test: nMappable {
 class ResponseMappingTests: XCTestCase {
     
     func testBasicTypes() {
-        func testMapping<T: nMap>(inout test: Test, map: T) {
+        func testMapping<T:Map>(inout test: Test, map: T) {
             test.string <-> map["string"]
             test.optString <-> map["optString"]
             test.impString <-> map["impString"]

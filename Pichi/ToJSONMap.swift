@@ -6,7 +6,7 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
-public final class ToJSONMap: nMap {
+public final class ToJSONMap: Map {
     
     var jsonDictionary: [String : AnyObject] = [:]
     private let key: String?

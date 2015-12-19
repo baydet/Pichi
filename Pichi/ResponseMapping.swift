@@ -6,7 +6,7 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
-public class ResponseMapping<N: nMappable>: Mapping<N, FromJSONMap> {
+public class ResponseMapping<N:Mappable>: Mapping<N, FromJSONMap> {
     
     required public init(mapFunction: MappingFunction) {
         super.init(mapFunction: mapFunction)

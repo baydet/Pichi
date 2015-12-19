@@ -6,7 +6,7 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
-public final class RequestMapper<N: nMappable>: Mapping<N, ToJSONMap> {
+public final class RequestMapper<N:Mappable>: Mapping<N, ToJSONMap> {
 
     required public init(mapFunction: MappingFunction) {
         super.init(mapFunction: mapFunction)

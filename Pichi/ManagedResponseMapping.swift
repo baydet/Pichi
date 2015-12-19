@@ -8,6 +8,6 @@
 
 import CoreData
 
-public class ManagedResponseMapping<N: NSManagedObject where N: nMappable>: ResponseMapping<N> {
+public class ManagedResponseMapping<N: NSManagedObject where N:Mappable>: ResponseMapping<N> {
 
 }

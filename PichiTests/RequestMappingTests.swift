@@ -12,7 +12,7 @@ import Pichi
 class RequestMappingTests: XCTestCase {
 
     func testBasicTypes() {
-        func testRequestMapping<T: nMap>(inout test: Test, map: T) {
+        func testRequestMapping<T:Map>(inout test: Test, map: T) {
             test.string <-> map["string"]["nested"]
             test.optString <-> map["optString"]
             test.impString <-> map["impString"]
