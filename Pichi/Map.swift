@@ -18,6 +18,7 @@ public protocol Map {
     func <-> <T>(inout left: T, right: Self)
 	func <-> <T>(inout left: T?, right: Self)
     func <-> <T>(inout left: T!, right: Self)
+    func <-> <T: Mappable>(inout left: T, right: (Self, (inout T, Self) -> Void))
 }
 
 /**
@@ -30,7 +31,7 @@ public protocol Mappable {
 /**
  *  Root class for mapping
  */
-public class Mapping<N:Mappable, T:Map> {
+public class Mapping<N: Mappable, T: Map> {
 	public typealias MappingFunction = (inout N, T) -> Void
 	let mapFunction: MappingFunction
 

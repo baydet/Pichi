@@ -57,6 +57,10 @@ public func <-> <T>(inout left: T, right: FromJSONMap) {
     basicType(&left, object: right.value())
 }
 
+public func <-> <T: Mappable>(inout left: T, right: (FromJSONMap, (inout T, FromJSONMap) -> Void)) {
+    right.1(&left, right.0)
+}
+
 func optionalBasicType<FieldType>(inout field: FieldType?, object: FieldType?) {
     if let value = object {
         field = value

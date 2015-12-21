@@ -15,6 +15,7 @@ struct Test: Mappable {
     var impString: String! = ""
     var null: String?
     var emptyKey: String?
+    var subTest: SubTest = SubTest()
     
     init?<T:Map>(_ map: T) {
         
@@ -24,26 +25,45 @@ struct Test: Mappable {
         string = value
         optString = value
         impString = value
+        subTest.string = value
     }
+}
+
+struct SubTest: Mappable {
+    init?<T:Map>(_ map: T) {
+        
+    }
+
+    var string: String = ""
+    
+    init() {
+    }
+}
+
+func subtestMapping<T:Map>(inout test: SubTest, map: T) {
+    test.string <-> map["string"]
+}
+
+func testMapping<T:Map>(inout test: Test, map: T) {
+    test.string <-> map["string"]
+    test.optString <-> map["optString"]
+    test.impString <-> map["impString"]
+    test.null <-> map["null"]
+    test.emptyKey <-> map[""]
+    test.subTest <-> (map["subtest"], subtestMapping)
 }
 
 class ResponseMappingTests: XCTestCase {
     
     func testBasicTypes() {
-        func testMapping<T:Map>(inout test: Test, map: T) {
-            test.string <-> map["string"]
-            test.optString <-> map["optString"]
-            test.impString <-> map["impString"]
-            test.null <-> map["null"]
-            test.emptyKey <-> map[""]
-        }
-    
+        
         let value = "value"
         let JSON : [String : AnyObject] = [
             "string" : value,
             "optString" : value,
             "impString" : value,
-            "null" : NSNull()
+            "null" : NSNull(),
+            "subtest" : ["string" : value]
         ]
 
         let map = FromJSONMap(JSON)
@@ -52,6 +72,7 @@ class ResponseMappingTests: XCTestCase {
         XCTAssertEqual(test.string, value)
         XCTAssertEqual(test.optString, value)
         XCTAssertEqual(test.impString, value)
+        XCTAssertEqual(test.subTest.string, value)
         XCTAssertNil(test.null)
         XCTAssertNil(test.emptyKey)
         

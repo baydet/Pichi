@@ -57,6 +57,10 @@ public func <-> <T>(inout left: T!, right: ToJSONMap) {
     optionalBasicType(left, map: right)
 }
 
+public func <-> <T: Mappable>(inout left: T, right: (ToJSONMap, (inout T, ToJSONMap) -> Void)) {
+    right.1(&left, right.0)
+}
+
 //func setValue:
 
 func basicType<N>(field: N, map: ToJSONMap) {

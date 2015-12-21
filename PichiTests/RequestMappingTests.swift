@@ -18,6 +18,7 @@ class RequestMappingTests: XCTestCase {
             test.impString <-> map["impString"]
             test.null <-> map["null"]
             test.emptyKey <-> map[""]
+            test.subTest <-> (map["subtest"], subtestMapping)
         }
         
         let map = ToJSONMap()
@@ -26,11 +27,13 @@ class RequestMappingTests: XCTestCase {
         testRequestMapping(&test, map: map)
         let dictionary: [String : AnyObject]! = map.value()
         let fromJSON = FromJSONMap(dictionary)
+
         var mappedTest = Test(value: "")
         testRequestMapping(&mappedTest, map: fromJSON)
         XCTAssertEqual(mappedTest.string, value)
         XCTAssertEqual(mappedTest.optString, value)
         XCTAssertEqual(mappedTest.impString, value)
+        XCTAssertEqual(mappedTest.subTest.string, value)
         XCTAssertNil(mappedTest.null)
         XCTAssertNil(mappedTest.emptyKey)
         print(value)
