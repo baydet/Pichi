@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8625B16B1C2596C20064B09B /* Pichi.h in Headers */ = {isa = PBXBuildFile; fileRef = 8625B16A1C2596C20064B09B /* Pichi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8625B1721C2596C20064B09B /* Pichi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8625B1671C2596C20064B09B /* Pichi.framework */; };
-		8625B1771C2596C20064B09B /* PichiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1761C2596C20064B09B /* PichiTests.swift */; };
 		8625B1871C2596D40064B09B /* ResponseMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1811C2596D40064B09B /* ResponseMapping.swift */; };
 		8625B1881C2596D40064B09B /* RequestMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1821C2596D40064B09B /* RequestMapping.swift */; };
 		8625B1891C2596D40064B09B /* ManagedResponseMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1831C2596D40064B09B /* ManagedResponseMapping.swift */; };
@@ -38,7 +37,6 @@
 		8625B16A1C2596C20064B09B /* Pichi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pichi.h; sourceTree = "<group>"; };
 		8625B16C1C2596C20064B09B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8625B1711C2596C20064B09B /* PichiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PichiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8625B1761C2596C20064B09B /* PichiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PichiTests.swift; sourceTree = "<group>"; };
 		8625B1781C2596C20064B09B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8625B1811C2596D40064B09B /* ResponseMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMapping.swift; sourceTree = "<group>"; };
 		8625B1821C2596D40064B09B /* RequestMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestMapping.swift; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 				86E5A70B1C28937100DB061E /* Model */,
 				8625B18D1C2596E20064B09B /* ResponseMappingTests.swift */,
 				8625B18E1C2596E20064B09B /* RequestMappingTests.swift */,
-				8625B1761C2596C20064B09B /* PichiTests.swift */,
 				8625B1781C2596C20064B09B /* Info.plist */,
 			);
 			path = PichiTests;
@@ -250,7 +247,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8625B1771C2596C20064B09B /* PichiTests.swift in Sources */,
 				8625B18F1C2596E20064B09B /* ResponseMappingTests.swift in Sources */,
 				8625B1901C2596E20064B09B /* RequestMappingTests.swift in Sources */,
 				86E5A70D1C28937A00DB061E /* Model.swift in Sources */,
