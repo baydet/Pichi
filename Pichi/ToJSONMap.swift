@@ -93,8 +93,6 @@ func basicType<N>(field: N, map: ToJSONMap) {
         _setValue(x)
     } else if let x = field as? Array<String> {
         _setValue(x)
-    } else if let x = field as? Array<AnyObject> {
-        _setValue(x)
     } else if let x = field as? Dictionary<String, NSNumber> { // Dictionaries
         _setValue(x)
     } else if let x = field as? Dictionary<String, Bool> {
@@ -106,8 +104,6 @@ func basicType<N>(field: N, map: ToJSONMap) {
     } else if let x = field as? Dictionary<String, Float> {
         _setValue(x)
     } else if let x = field as? Dictionary<String, String> {
-        _setValue(x)
-    } else if let x = field as? Dictionary<String, AnyObject> {
         _setValue(x)
     }
 }

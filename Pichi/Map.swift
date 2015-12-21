@@ -18,7 +18,19 @@ public protocol Map {
     func <-> <T>(inout left: T, right: Self)
 	func <-> <T>(inout left: T?, right: Self)
     func <-> <T>(inout left: T!, right: Self)
+    
     func <-> <T: Mappable>(inout left: T, right: (Self, (inout T, Self) -> Void))
+
+    func <-> <T : RawRepresentable>(inout left: T, right: Self)
+    func <-> <T : RawRepresentable>(inout left: T?, right: Self)
+    func <-> <T : RawRepresentable>(inout left: T!, right: Self)
+    
+    //    /// Object of Basic type with Transform
+    //    public func <-<T, Transform : TransformType where Transform.Object == T>(inout left: T, right: (Map, Transform)) -> <<error type>>
+    //    /// Optional object of basic type with Transform
+    //    public func <-<T, Transform : TransformType where Transform.Object == T>(inout left: T?, right: (Map, Transform)) -> <<error type>>
+    //    /// Implicitly unwrapped optional object of basic type with Transform
+    //    public func <-<T, Transform : TransformType where Transform.Object == T>(inout left: T!, right: (Map, Transform)) -> <<error type>>
 }
 
 /**

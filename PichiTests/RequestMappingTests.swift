@@ -18,7 +18,6 @@ class RequestMappingTests: XCTestCase {
             test.impString <-> map["impString"]
             test.null <-> map["null"]
             test.emptyKey <-> map[""]
-            test.subTest <-> (map["subtest"], subtestMapping)
         }
         
         let map = ToJSONMap()
@@ -33,9 +32,21 @@ class RequestMappingTests: XCTestCase {
         XCTAssertEqual(mappedTest.string, value)
         XCTAssertEqual(mappedTest.optString, value)
         XCTAssertEqual(mappedTest.impString, value)
-        XCTAssertEqual(mappedTest.subTest.string, value)
         XCTAssertNil(mappedTest.null)
         XCTAssertNil(mappedTest.emptyKey)
         print(value)
+    }
+    
+    func testMappableArgument() {
+        let map = ToJSONMap()
+        let value = "test"
+        var test = Test(value: "test")
+        mappableOperatorMapping(&test, map: map)
+        let dictionary: [String : AnyObject]! = map.value()
+        let fromJSON = FromJSONMap(dictionary)
+        
+        var mappedTest = Test(value: "")
+        mappableOperatorMapping(&mappedTest, map: fromJSON)
+        XCTAssertEqual(mappedTest.subTest.string, value)
     }
 }

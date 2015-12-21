@@ -61,6 +61,27 @@ public func <-> <T: Mappable>(inout left: T, right: (FromJSONMap, (inout T, From
     right.1(&left, right.0)
 }
 
+public func <-> <T : RawRepresentable>(inout left: T, right: FromJSONMap) {
+    let optRawValue: (T.RawValue)? = right.value()
+    if let raw = optRawValue  {
+        basicType(&left, object: T(rawValue: raw))
+    }
+}
+
+public func <-> <T : RawRepresentable>(inout left: T!, right: FromJSONMap) {
+    let optRawValue: (T.RawValue)? = right.value()
+    if let raw = optRawValue  {
+        optionalBasicType(&left, object: T(rawValue: raw))
+    }
+}
+
+public func <-> <T : RawRepresentable>(inout left: T?, right: FromJSONMap) {
+    let optRawValue: (T.RawValue)? = right.value()
+    if let raw = optRawValue  {
+        optionalBasicType(&left, object: T(rawValue: raw))
+    }
+}
+
 func optionalBasicType<FieldType>(inout field: FieldType?, object: FieldType?) {
     if let value = object {
         field = value
