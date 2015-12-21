@@ -37,6 +37,31 @@ class RequestMappingTests: XCTestCase {
         print(value)
     }
     
+    func testRawRepresentable() {
+        
+        func rawRepresentableRequestMapping<T:Map>(inout test: Test, map: T) {
+            test.enumKey <-> map["enum"]
+            test.optEnumKey <-> map["opt"]
+            test.impEnumKey <-> map["imp"]
+        }
+
+        let map = ToJSONMap()
+        let value = EnumKey.Two
+        var test = Test(value: "")
+        test.enumKey = EnumKey.Two
+        test.impEnumKey = EnumKey.Two
+        test.optEnumKey = EnumKey.Two
+        rawRepresentableRequestMapping(&test, map: map)
+        let dictionary: [String : AnyObject]! = map.value()
+        let fromJSON = FromJSONMap(dictionary)
+        
+        var mappedTest = Test(value: "")
+        rawRepresentableRequestMapping(&mappedTest, map: fromJSON)
+        XCTAssertEqual(mappedTest.enumKey, value)
+        XCTAssertEqual(mappedTest.optEnumKey, value)
+        XCTAssertEqual(mappedTest.impEnumKey, value)
+    }
+    
     func testMappableArgument() {
         let map = ToJSONMap()
         let value = "test"
