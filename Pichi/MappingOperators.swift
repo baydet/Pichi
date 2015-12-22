@@ -6,3 +6,6 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
+extension Int {
+    
+}

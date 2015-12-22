@@ -8,6 +8,22 @@
 
 infix operator <-> {}
 
+enum MapError: ErrorType {
+    case UnexpectedValueType
+}
+
+public enum JSONValue {
+    case String
+    case Bool
+    case Number
+    case Null
+}
+
+public protocol JSONConvertable {
+//    typealias JSONValue
+    var jsonValue: JSONValue { get }
+}
+
 /**
  *  This protocol defines high level abstraction for deserializing objects from JSON
  */
@@ -18,7 +34,7 @@ public protocol Map {
     func <-> <T>(inout left: T, right: Self)
 	func <-> <T>(inout left: T?, right: Self)
     func <-> <T>(inout left: T!, right: Self)
-    
+
     func <-> <T: Mappable>(inout left: T, right: (Self, (inout T, Self) -> Void))
 
     func <-> <T : RawRepresentable>(inout left: T, right: Self)
@@ -36,7 +52,7 @@ public protocol Map {
 /**
  *  Defines object that could be mapped to/from JSON
  */
-public protocol Mappable {
+public protocol Mappable: JSONConvertable {
 	init?<T:Map>(_ map: T)
 }
 
