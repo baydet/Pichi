@@ -12,7 +12,7 @@
 		8625B1871C2596D40064B09B /* ResponseMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1811C2596D40064B09B /* ResponseMapping.swift */; };
 		8625B1881C2596D40064B09B /* RequestMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1821C2596D40064B09B /* RequestMapping.swift */; };
 		8625B1891C2596D40064B09B /* ManagedResponseMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1831C2596D40064B09B /* ManagedResponseMapping.swift */; };
-		8625B18A1C2596D40064B09B /* MappingOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1841C2596D40064B09B /* MappingOperators.swift */; };
+		8625B18A1C2596D40064B09B /* JSONRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1841C2596D40064B09B /* JSONRepresentable.swift */; };
 		8625B18B1C2596D40064B09B /* FromJSONMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1851C2596D40064B09B /* FromJSONMap.swift */; };
 		8625B18C1C2596D40064B09B /* ToJSONMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1861C2596D40064B09B /* ToJSONMap.swift */; };
 		8625B18F1C2596E20064B09B /* ResponseMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B18D1C2596E20064B09B /* ResponseMappingTests.swift */; };
@@ -41,7 +41,7 @@
 		8625B1811C2596D40064B09B /* ResponseMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMapping.swift; sourceTree = "<group>"; };
 		8625B1821C2596D40064B09B /* RequestMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestMapping.swift; sourceTree = "<group>"; };
 		8625B1831C2596D40064B09B /* ManagedResponseMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedResponseMapping.swift; sourceTree = "<group>"; };
-		8625B1841C2596D40064B09B /* MappingOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappingOperators.swift; sourceTree = "<group>"; };
+		8625B1841C2596D40064B09B /* JSONRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRepresentable.swift; sourceTree = "<group>"; };
 		8625B1851C2596D40064B09B /* FromJSONMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromJSONMap.swift; sourceTree = "<group>"; };
 		8625B1861C2596D40064B09B /* ToJSONMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToJSONMap.swift; sourceTree = "<group>"; };
 		8625B18D1C2596E20064B09B /* ResponseMappingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMappingTests.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 				8625B1811C2596D40064B09B /* ResponseMapping.swift */,
 				8625B1821C2596D40064B09B /* RequestMapping.swift */,
 				8625B1831C2596D40064B09B /* ManagedResponseMapping.swift */,
-				8625B1841C2596D40064B09B /* MappingOperators.swift */,
+				8625B1841C2596D40064B09B /* JSONRepresentable.swift */,
 				8625B1851C2596D40064B09B /* FromJSONMap.swift */,
 				8625B1861C2596D40064B09B /* ToJSONMap.swift */,
 				8625B16A1C2596C20064B09B /* Pichi.h */,
@@ -233,7 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8625B18A1C2596D40064B09B /* MappingOperators.swift in Sources */,
+				8625B18A1C2596D40064B09B /* JSONRepresentable.swift in Sources */,
 				8625B1891C2596D40064B09B /* ManagedResponseMapping.swift in Sources */,
 				8625B1881C2596D40064B09B /* RequestMapping.swift in Sources */,
 				8625B1951C25973E0064B09B /* Map.swift in Sources */,

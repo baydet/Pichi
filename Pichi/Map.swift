@@ -12,17 +12,37 @@ enum MapError: ErrorType {
     case UnexpectedValueType
 }
 
-public enum JSONValue {
-    case String
-    case Bool
-    case Number
-    case Null
-}
+//public enum JSONValue {
+//    case string
+//    case Bool
+//    case Number
+//    case Null
+//}
 
 public protocol JSONConvertable {
-//    typealias JSONValue
-    var jsonValue: JSONValue { get }
+    typealias JSON
+    var jsonValue: JSON { get }
 }
+
+extension String: JSONConvertable {
+    public typealias JSON = String
+    
+    public var jsonValue: JSON {
+        return self
+    }
+}
+
+public protocol JSONRawRepresentable: RawRepresentable, JSONConvertable {
+}
+
+public extension JSONRawRepresentable {
+    public typealias JSON = Self.RawValue
+    
+    public var jsonValue: Self.JSON {
+        return self.rawValue
+    }
+}
+
 
 /**
  *  This protocol defines high level abstraction for deserializing objects from JSON
