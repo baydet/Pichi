@@ -66,7 +66,7 @@ func mappableOperatorMapping<T:Map>(inout test: Test, map: T) {
 }
 
 func rawRepresentableMapping<T:Map>(inout test: Test, map: T) {
-    test.enumKey <-> map["enum"]
-    test.optEnumKey <-> map["enum"]
-    test.impEnumKey <-> map["enum"]
+//    test.enumKey <-> map["enum"]
+//    test.optEnumKey <-> map["enum"]
+//    test.impEnumKey <-> map["enum"]
 }

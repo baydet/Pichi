@@ -12,37 +12,13 @@ enum MapError: ErrorType {
     case UnexpectedValueType
 }
 
-//public enum JSONValue {
-//    case string
-//    case Bool
-//    case Number
-//    case Null
-//}
-
-public protocol JSONConvertable {
+public protocol TransformType {
+    typealias Object
     typealias JSON
-    var jsonValue: JSON { get }
-}
-
-extension String: JSONConvertable {
-    public typealias JSON = String
     
-    public var jsonValue: JSON {
-        return self
-    }
+    func transformFromJSON(value: AnyObject?) -> Object?
+    func transformToJSON(value: Object?) -> JSON?
 }
-
-public protocol JSONRawRepresentable: RawRepresentable, JSONConvertable {
-}
-
-public extension JSONRawRepresentable {
-    public typealias JSON = Self.RawValue
-    
-    public var jsonValue: Self.JSON {
-        return self.rawValue
-    }
-}
-
 
 /**
  *  This protocol defines high level abstraction for deserializing objects from JSON
@@ -51,15 +27,19 @@ public protocol Map {
 	subscript(key: String) -> Self { get }
     func value<T>() -> T?
 
-    func <-> <T>(inout left: T, right: Self)
-	func <-> <T>(inout left: T?, right: Self)
-    func <-> <T>(inout left: T!, right: Self)
+    func <-> <T: JSONConvertable>(inout left: T, right: Self)
+    func <-> <T: JSONConvertable>(inout left: T?, right: Self)
+    func <-> <T: JSONConvertable>(inout left: T!, right: Self)
+    
+    func <-> <T: CollectionType where T.Generator.Element: JSONConvertable>(inout left: T, right: Self)
+    
+//    func <-> <T: JSONConvertable>(inout left: [T], right: Self)
 
     func <-> <T: Mappable>(inout left: T, right: (Self, (inout T, Self) -> Void))
 
-    func <-> <T : RawRepresentable>(inout left: T, right: Self)
-    func <-> <T : RawRepresentable>(inout left: T?, right: Self)
-    func <-> <T : RawRepresentable>(inout left: T!, right: Self)
+//    func <-> <T : RawRepresentable>(inout left: T, right: Self)
+//    func <-> <T : RawRepresentable>(inout left: T?, right: Self)
+//    func <-> <T : RawRepresentable>(inout left: T!, right: Self)
     
     //    /// Object of Basic type with Transform
     //    public func <-<T, Transform : TransformType where Transform.Object == T>(inout left: T, right: (Map, Transform)) -> <<error type>>
@@ -72,7 +52,7 @@ public protocol Map {
 /**
  *  Defines object that could be mapped to/from JSON
  */
-public protocol Mappable: JSONConvertable {
+public protocol Mappable {
 	init?<T:Map>(_ map: T)
 }
 

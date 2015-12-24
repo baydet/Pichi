@@ -45,15 +45,15 @@ public final class ToJSONMap: Map {
     }
 }
 
-public func <-> <T>(inout left: T, right: ToJSONMap) {
+public func <-> <T: JSONConvertable>(inout left: T, right: ToJSONMap) {
     basicType(left, map: right)
 }
 
-public func <-> <T>(inout left: T?, right: ToJSONMap) {
+public func <-> <T: JSONConvertable>(inout left: T?, right: ToJSONMap) {
     optionalBasicType(left, map: right)
 }
 
-public func <-> <T>(inout left: T!, right: ToJSONMap) {
+public func <-> <T: JSONConvertable>(inout left: T!, right: ToJSONMap) {
     optionalBasicType(left, map: right)
 }
 
@@ -61,65 +61,14 @@ public func <-> <T: Mappable>(inout left: T, right: (ToJSONMap, (inout T, ToJSON
     right.1(&left, right.0)
 }
 
-public func <-> <T : RawRepresentable>(inout left: T, right: ToJSONMap) {
-    basicType(left.rawValue, map: right)
+public func <-> <T: CollectionType where T.Generator.Element: JSONConvertable>(inout left: T, right: ToJSONMap) {
 }
 
-public func <-> <T : RawRepresentable>(inout left: T!, right: ToJSONMap) {
-    optionalBasicType(left.rawValue, map: right)
+func basicType<N: JSONConvertable>(field: N, map: ToJSONMap) {
+    map.setValue(field.jsonValue as? AnyObject)
 }
 
-public func <-> <T : RawRepresentable>(inout left: T?, right: ToJSONMap) {
-    optionalBasicType(left?.rawValue, map: right)
-}
-
-
-func basicType<N>(field: N, map: ToJSONMap) {
-    
-    func _setValue(value: AnyObject) {
-        map.setValue(value)
-    }
-    
-    if let x = field as? NSNumber { // basic types
-        _setValue(x)
-    } else if let x = field as? Bool {
-        _setValue(x)
-    } else if let x = field as? Int {
-        _setValue(x)
-    } else if let x = field as? Double {
-        _setValue(x)
-    } else if let x = field as? Float {
-        _setValue(x)
-    } else if let x = field as? String {
-        _setValue(x)
-    } else if let x = field as? Array<NSNumber> { // Arrays
-        _setValue(x)
-    } else if let x = field as? Array<Bool> {
-        _setValue(x)
-    } else if let x = field as? Array<Int> {
-        _setValue(x)
-    } else if let x = field as? Array<Double> {
-        _setValue(x)
-    } else if let x = field as? Array<Float> {
-        _setValue(x)
-    } else if let x = field as? Array<String> {
-        _setValue(x)
-    } else if let x = field as? Dictionary<String, NSNumber> { // Dictionaries
-        _setValue(x)
-    } else if let x = field as? Dictionary<String, Bool> {
-        _setValue(x)
-    } else if let x = field as? Dictionary<String, Int> {
-        _setValue(x)
-    } else if let x = field as? Dictionary<String, Double> {
-        _setValue(x)
-    } else if let x = field as? Dictionary<String, Float> {
-        _setValue(x)
-    } else if let x = field as? Dictionary<String, String> {
-        _setValue(x)
-    }
-}
-
-func optionalBasicType<N>(field: N?, map: ToJSONMap) {
+func optionalBasicType<N: JSONConvertable>(field: N?, map: ToJSONMap) {
     if let field = field {
         basicType(field, map: map)
     }
