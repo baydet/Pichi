@@ -58,7 +58,7 @@ extension Int64: JSONBasicConvertable {
     public typealias JSON = Int
     
     public var jsonValue: JSON {
-        return Int(self)
+        return JSON(self)
     }
 }
 
@@ -66,7 +66,7 @@ extension Int32: JSONBasicConvertable {
     public typealias JSON = Int
     
     public var jsonValue: JSON {
-        return Int(self)
+        return JSON(self)
     }
 }
 
@@ -74,7 +74,7 @@ extension Int16: JSONBasicConvertable {
     public typealias JSON = Int
     
     public var jsonValue: JSON {
-        return Int(self)
+        return JSON(self)
     }
 }
 
@@ -82,7 +82,7 @@ extension Int8: JSONBasicConvertable {
     public typealias JSON = Int
     
     public var jsonValue: JSON {
-        return Int(self)
+        return JSON(self)
     }
 }
 
@@ -91,38 +91,5 @@ extension Bool: JSONBasicConvertable {
     
     public var jsonValue: JSON {
         return self
-    }
-}
-
-extension CollectionType where Generator.Element: JSONBasicConvertable {
-    public typealias JSON = [Generator.Element.JSON]
-    
-    public var jsonValue: JSON {
-        return self.map {
-            $0.jsonValue
-        }
-    }
-    
-    public init?(jsonObject: Any) {
-        if let objects = jsonObject as? [AnyObject] {
-            let a = objects.flatMap { (value) -> Generator.Element? in
-                return Generator.Element(jsonObject: value)
-            }
-            print(a)
-        }
-        return nil
-    }
-}
-
-extension Array where Element: JSONBasicConvertable {   
-    public init?(jsonObject: Any) {
-        print(jsonObject)
-        if let objects = jsonObject as? [AnyObject] {
-            self = objects.flatMap {
-                return Element(jsonObject: $0)
-            }
-            return
-        }
-        return nil
     }
 }

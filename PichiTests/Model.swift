@@ -20,6 +20,10 @@ struct Test: Mappable {
     var null: String?
     var emptyKey: String?
     
+    var array: [String] = []
+    var optArray: [String]? = []
+    var impArray: [String]! = []
+    
     var enumKey: EnumKey = .One
     var optEnumKey: EnumKey? = nil
     var impEnumKey: EnumKey! = nil
@@ -35,6 +39,10 @@ struct Test: Mappable {
         optString = value
         impString = value
         subTest.string = value
+        
+        array = [value, value]
+        optArray = array
+        impArray = array
     }
 }
 

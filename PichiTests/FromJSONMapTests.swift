@@ -31,20 +31,6 @@ class ResponseMappingTests: XCTestCase {
         XCTAssertNil(test.emptyKey)
     }
     
-    func testRawRepresentable() {
-        let value = EnumKey.Two
-        let JSON : [String : AnyObject] = [
-            "enum" : value.rawValue
-        ]
-        
-        let map = FromJSONMap(JSON)
-        var test = Test(map)
-        rawRepresentableMapping(&test, map: map)
-//        XCTAssertEqual(test.enumKey, value)
-//        XCTAssertEqual(test.optEnumKey, value)
-//        XCTAssertEqual(test.impEnumKey, value)
-    }
-    
     func testArrayMapping() {
         
         let value = "value"

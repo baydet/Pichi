@@ -6,6 +6,16 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
+private extension CollectionType where Generator.Element: JSONBasicConvertable {
+    typealias JSON = [Generator.Element.JSON]
+    
+    var jsonValue: JSON {
+        return self.map {
+            $0.jsonValue
+        }
+    }
+}
+
 public final class ToJSONMap: Map {
     
     var jsonDictionary: AnyObject = [:]
@@ -50,26 +60,16 @@ public final class ToJSONMap: Map {
 }
 
 public func <-> <T: JSONBasicConvertable>(inout left: T, right: ToJSONMap) {
-    basicType(left, map: right)
-}
-
-public func <-> <T: JSONBasicConvertable>(inout left: T?, right: ToJSONMap) {
-    optionalBasicType(left, map: right)
-}
-
-public func <-> <T: JSONBasicConvertable>(inout left: T!, right: ToJSONMap) {
-    optionalBasicType(left, map: right)
-}
-
-public func <-> <T: JSONBasicConvertable>(inout left: [T], right: ToJSONMap) {
     right.setValue(left.jsonValue as? AnyObject)
 }
 
-public func <-> <T: JSONBasicConvertable>(inout left: [T]?, right: ToJSONMap) {
-    right.setValue(left?.jsonValue as? AnyObject)
+public func <-> <T: JSONBasicConvertable>(inout left: T?, right: ToJSONMap) {
+    if let field = left {
+        right.setValue(field.jsonValue as? AnyObject)
+    }
 }
 
-public func <-> <T: JSONBasicConvertable>(inout left: [T]!, right: ToJSONMap) {
+public func <-> <T: JSONBasicConvertable>(inout left: T!, right: ToJSONMap) {
     right.setValue(left.jsonValue as? AnyObject)
 }
 
@@ -88,12 +88,16 @@ public func <-> <T: Mappable>(inout left: T!, right: (ToJSONMap, (inout T, ToJSO
     right.1(&left!, right.0)
 }
 
-func basicType<N: JSONBasicConvertable>(field: N, map: ToJSONMap) {
-    map.setValue(field.jsonValue as? AnyObject)
+//MARK: Collection operators
+
+public func <-> <S: CollectionType where S.Generator.Element: JSONBasicConvertable>(inout left: S, right: ToJSONMap) {
+    right.setValue(left.jsonValue as? AnyObject)
 }
 
-func optionalBasicType<N: JSONBasicConvertable>(field: N?, map: ToJSONMap) {
-    if let field = field {
-        basicType(field, map: map)
-    }
+public func <-> <S: CollectionType where S.Generator.Element: JSONBasicConvertable>(inout left: S?, right: ToJSONMap) {
+    right.setValue(left?.jsonValue as? AnyObject)
+}
+
+public func <-> <S: CollectionType where S.Generator.Element: JSONBasicConvertable>(inout left: S!, right: ToJSONMap) {
+    right.setValue(left.jsonValue as? AnyObject)
 }

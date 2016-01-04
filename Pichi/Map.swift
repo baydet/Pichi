@@ -10,9 +10,12 @@ import CoreData
 
 infix operator <-> {}
 
-public enum CollectionMapPolicy {
-    case Replace
-    case Merge
+public protocol TransformType {
+    typealias Object
+    typealias JSON
+    
+    func transformFromJSON(value: AnyObject?) -> Object?
+    func transformToJSON(value: Object?) -> JSON?
 }
 
 /**
@@ -26,18 +29,9 @@ public protocol Map {
     func <-> <T: JSONBasicConvertable>(inout left: T?, right: Self)
     func <-> <T: JSONBasicConvertable>(inout left: T!, right: Self)
     
-    func <-> <T: JSONBasicConvertable>(inout left: [T], right: Self)
-    func <-> <T: JSONBasicConvertable>(inout left: [T]!, right: Self)
-    func <-> <T: JSONBasicConvertable>(inout left: [T]?, right: Self)
-
     func <-> <T: Mappable>(inout left: T, right: (Self, (inout T, Self) -> Void))
     func <-> <T: Mappable>(inout left: T!, right: (Self, (inout T, Self) -> Void))
     func <-> <T: Mappable>(inout left: T?, right: (Self, (inout T, Self) -> Void))
-
-//    func <-> <T: Mappable>(inout left: T?, right: (Self, (inout T, Self) -> Void))
-//    func <-> <T : RawRepresentable>(inout left: T, right: Self)
-//    func <-> <T : RawRepresentable>(inout left: T?, right: Self)
-//    func <-> <T : RawRepresentable>(inout left: T!, right: Self)
 }
 
 /**

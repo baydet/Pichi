@@ -11,9 +11,9 @@ import Pichi
 
 class RequestMappingTests: XCTestCase {
 
-    func testBasicTypes() {
+    func testJSONBasicConvertable() {
         func testRequestMapping<T:Map>(inout test: Test, map: T) {
-            test.string <-> map["string"]["nested"]
+            test.string <-> map["string"]
             test.optString <-> map["optString"]
             test.impString <-> map["impString"]
             test.null <-> map["null"]
@@ -37,52 +37,36 @@ class RequestMappingTests: XCTestCase {
         print(value)
     }
     
-    func testRawRepresentable() {
+    func testNestedMapping() {
         
-        func rawRepresentableRequestMapping<T:Map>(inout test: Test, map: T) {
-//            test.enumKey <-> map["enum"]
-//            test.optEnumKey <-> map["opt"]
-//            test.impEnumKey <-> map["imp"]
-        }
-
-        let map = ToJSONMap()
-        let value = EnumKey.Two
-        var test = Test(value: "")
-        test.enumKey = EnumKey.Two
-        test.impEnumKey = EnumKey.Two
-        test.optEnumKey = EnumKey.Two
-        rawRepresentableRequestMapping(&test, map: map)
-        let dictionary: [String : AnyObject]! = map.value()
-        let fromJSON = FromJSONMap(dictionary)
-        
-        var mappedTest = Test(value: "")
-        rawRepresentableRequestMapping(&mappedTest, map: fromJSON)
-//        XCTAssertEqual(mappedTest.enumKey, value)
-//        XCTAssertEqual(mappedTest.optEnumKey, value)
-//        XCTAssertEqual(mappedTest.impEnumKey, value)
     }
     
-    func testArrayMapping() {
+    func testCollectionMapping() {
         
-        let value = "value"
-        var arrValue = [value, value]
-        let map = ToJSONMap()
-        arrValue <-> map
-        
-        print(map.value()!)
-        let fromJSONMap = FromJSONMap(map.value())
-        print(fromJSONMap.value()!)
-        var mapped: [String] = []
-        mapped <-> fromJSONMap
-        
-        XCTAssertEqual(mapped.count, arrValue.count)
-        for i in 0..<mapped.count {
-            XCTAssertEqual(mapped[i], arrValue[i])
+        var test = Test(value: "test")
+        func testArrayMapping(inout test: Test, map: ToJSONMap) {
+            test.array <-> map["array"]
+            test.optArray <-> map["optArray"]
+            test.impArray <-> map["impArray"]
         }
+        
+        let map = ToJSONMap()
+        
+//        arrValue <-> map
+        
+//        let fromJSONMap = FromJSONMap(map.value())
+//        print(fromJSONMap.value()!)
+//        var mapped: [String] = []
+//        mapped <-> fromJSONMap
+//        
+//        XCTAssertEqual(mapped.count, arrValue.count)
+//        for i in 0..<mapped.count {
+//            XCTAssertEqual(mapped[i], arrValue[i])
+//        }
     }
 
     
-    func testMappableArgument() {
+    func testMappable() {
         let map = ToJSONMap()
         let value = "test"
         var test = Test(value: "test")

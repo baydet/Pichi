@@ -6,6 +6,19 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
+private extension Array where Element: JSONBasicConvertable {
+    init?(jsonObject: Any) {
+        print(jsonObject)
+        if let objects = jsonObject as? [AnyObject] {
+            self = objects.flatMap {
+                return Element(jsonObject: $0)
+            }
+            return
+        }
+        return nil
+    }
+}
+
 public struct FromJSONMap: Map {
     
     private let json: AnyObject

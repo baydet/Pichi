@@ -15,11 +15,12 @@
 		8625B18A1C2596D40064B09B /* JSONRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1841C2596D40064B09B /* JSONRepresentable.swift */; };
 		8625B18B1C2596D40064B09B /* FromJSONMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1851C2596D40064B09B /* FromJSONMap.swift */; };
 		8625B18C1C2596D40064B09B /* ToJSONMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1861C2596D40064B09B /* ToJSONMap.swift */; };
-		8625B18F1C2596E20064B09B /* ResponseMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B18D1C2596E20064B09B /* ResponseMappingTests.swift */; };
-		8625B1901C2596E20064B09B /* RequestMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B18E1C2596E20064B09B /* RequestMappingTests.swift */; };
+		8625B18F1C2596E20064B09B /* FromJSONMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B18D1C2596E20064B09B /* FromJSONMapTests.swift */; };
+		8625B1901C2596E20064B09B /* ToJSONMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B18E1C2596E20064B09B /* ToJSONMapTests.swift */; };
 		8625B1921C2596EC0064B09B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8625B1911C2596EC0064B09B /* CoreData.framework */; };
 		8625B1951C25973E0064B09B /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1941C25973E0064B09B /* Map.swift */; };
 		86E5A70D1C28937A00DB061E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E5A70C1C28937A00DB061E /* Model.swift */; };
+		D38A96611C3ABC500034A291 /* JSONRepresentableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38A96601C3ABC500034A291 /* JSONRepresentableTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,11 +45,12 @@
 		8625B1841C2596D40064B09B /* JSONRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRepresentable.swift; sourceTree = "<group>"; };
 		8625B1851C2596D40064B09B /* FromJSONMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromJSONMap.swift; sourceTree = "<group>"; };
 		8625B1861C2596D40064B09B /* ToJSONMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToJSONMap.swift; sourceTree = "<group>"; };
-		8625B18D1C2596E20064B09B /* ResponseMappingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMappingTests.swift; sourceTree = "<group>"; };
-		8625B18E1C2596E20064B09B /* RequestMappingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestMappingTests.swift; sourceTree = "<group>"; };
+		8625B18D1C2596E20064B09B /* FromJSONMapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromJSONMapTests.swift; sourceTree = "<group>"; };
+		8625B18E1C2596E20064B09B /* ToJSONMapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToJSONMapTests.swift; sourceTree = "<group>"; };
 		8625B1911C2596EC0064B09B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8625B1941C25973E0064B09B /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		86E5A70C1C28937A00DB061E /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		D38A96601C3ABC500034A291 /* JSONRepresentableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRepresentableTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +112,9 @@
 			isa = PBXGroup;
 			children = (
 				86E5A70B1C28937100DB061E /* Model */,
-				8625B18D1C2596E20064B09B /* ResponseMappingTests.swift */,
-				8625B18E1C2596E20064B09B /* RequestMappingTests.swift */,
+				8625B18D1C2596E20064B09B /* FromJSONMapTests.swift */,
+				8625B18E1C2596E20064B09B /* ToJSONMapTests.swift */,
+				D38A96601C3ABC500034A291 /* JSONRepresentableTests.swift */,
 				8625B1781C2596C20064B09B /* Info.plist */,
 			);
 			path = PichiTests;
@@ -247,8 +250,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8625B18F1C2596E20064B09B /* ResponseMappingTests.swift in Sources */,
-				8625B1901C2596E20064B09B /* RequestMappingTests.swift in Sources */,
+				D38A96611C3ABC500034A291 /* JSONRepresentableTests.swift in Sources */,
+				8625B18F1C2596E20064B09B /* FromJSONMapTests.swift in Sources */,
+				8625B1901C2596E20064B09B /* ToJSONMapTests.swift in Sources */,
 				86E5A70D1C28937A00DB061E /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
