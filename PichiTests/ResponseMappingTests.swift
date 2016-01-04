@@ -22,7 +22,7 @@ class ResponseMappingTests: XCTestCase {
         ]
 
         let map = FromJSONMap(JSON)
-        var test = Test(map)!
+        var test = Test(map)
         testMapping(&test, map: map)
         XCTAssertEqual(test.string, value)
         XCTAssertEqual(test.optString, value)
@@ -38,7 +38,7 @@ class ResponseMappingTests: XCTestCase {
         ]
         
         let map = FromJSONMap(JSON)
-        var test = Test(map)!
+        var test = Test(map)
         rawRepresentableMapping(&test, map: map)
 //        XCTAssertEqual(test.enumKey, value)
 //        XCTAssertEqual(test.optEnumKey, value)
@@ -68,7 +68,7 @@ class ResponseMappingTests: XCTestCase {
         ]
         
         let map = FromJSONMap(JSON)
-        var test = Test(map)!
+        var test = Test(map)
         mappableOperatorMapping(&test, map: map)
         XCTAssertEqual(test.subTest.string, value)
     }

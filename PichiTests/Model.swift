@@ -26,7 +26,7 @@ struct Test: Mappable {
     
     var subTest: SubTest = SubTest()
     
-    init?<T:Map>(_ map: T) {
+    init<T:Map>(_ map: T) {
         
     }
     
@@ -39,7 +39,7 @@ struct Test: Mappable {
 }
 
 struct SubTest: Mappable {
-    init?<T:Map>(_ map: T) {
+    init<T:Map>(_ map: T) {
         
     }
     

@@ -8,10 +8,10 @@
 
 public struct FromJSONMap: Map {
     
-    private let json: [String : AnyObject]
+    private let json: AnyObject
     
     public init(_ json: AnyObject?) {
-        if let json = json as? [String : AnyObject] {
+        if let json = json {
             self.json = json
         } else {
             self.json = [:]
@@ -42,79 +42,67 @@ public struct FromJSONMap: Map {
     }
 }
 
-/// Fetch value from JSON dictionary, loop through keyPathComponents until we reach the desired object
-
-
-public func <-> <T: JSONConvertable>(inout left: T?, right: FromJSONMap) {
+public func <-> <T: JSONBasicConvertable>(inout left: T?, right: FromJSONMap) {
     guard let value: AnyObject = right.value() else {
         return
     }
     left = T(jsonObject: value)
 }
 
-public func <-> <T: JSONConvertable>(inout left: T!, right: FromJSONMap) {
+public func <-> <T: JSONBasicConvertable>(inout left: T!, right: FromJSONMap) {
     guard let value: AnyObject = right.value(), a = T(jsonObject: value) else {
         return
     }
     left = a
 }
 
-public func <-> <T: JSONConvertable>(inout left: T, right: FromJSONMap) {
+public func <-> <T: JSONBasicConvertable>(inout left: T, right: FromJSONMap) {
     guard let value: AnyObject = right.value(), a = T(jsonObject: value) else {
         return
     }
     left = a
+}
+
+public func <-> <T: JSONBasicConvertable>(inout left: [T], right: FromJSONMap) {
+    guard let value: AnyObject = right.value() else {
+        return
+    }
+    let a = Array<T>(jsonObject: value)
+    left = a ?? left
+}
+
+public func <-> <T: JSONBasicConvertable>(inout left: [T]?, right: FromJSONMap) {
+    guard let value: AnyObject = right.value() else {
+        return
+    }
+    let a = Array<T>(jsonObject: value)
+    left = a ?? left
+}
+
+public func <-> <T: JSONBasicConvertable>(inout left: [T]!, right: FromJSONMap) {
+    guard let value: AnyObject = right.value() else {
+        return
+    }
+    let a = Array<T>(jsonObject: value)
+    left = a ?? left
 }
 
 public func <-> <T: Mappable>(inout left: T, right: (FromJSONMap, (inout T, FromJSONMap) -> Void)) {
     right.1(&left, right.0)
 }
 
-public func <-> <T: CollectionType where T.Generator.Element: JSONConvertable>(inout left: T, right: FromJSONMap) {
-    guard let value: AnyObject = right.value() else {
-        return
-    }
-    let a = T(jsonObject: value)
-    left = a ?? left
-}
-
-//public func <-> <T: JSONConvertable>(inout left: [T], right: FromJSONMap) {
-//    guard let value: AnyObject = right.value(), a = Array<T>(jsonObject: value) else {
-//        return
-//    }
-//    left = a
-//}
-
-//public func <-> <T : RawRepresentable>(inout left: T, right: FromJSONMap) {
-//    let optRawValue: (T.RawValue)? = right.value()
-//    if let raw = optRawValue  {
-//        basicType(&left, object: T(rawValue: raw))
-//    }
-//}
-//
-//public func <-> <T : RawRepresentable>(inout left: T!, right: FromJSONMap) {
-//    let optRawValue: (T.RawValue)? = right.value()
-//    if let raw = optRawValue  {
-//        optionalBasicType(&left, object: T(rawValue: raw))
-//    }
-//}
-//
-//public func <-> <T : RawRepresentable>(inout left: T?, right: FromJSONMap) {
-//    let optRawValue: (T.RawValue)? = right.value()
-//    if let raw = optRawValue  {
-//        optionalBasicType(&left, object: T(rawValue: raw))
-//    }
-//}
-
-func optionalBasicType<FieldType>(inout field: FieldType?, object: FieldType?) {
-    if let value = object {
-        field = value
+public func <-> <T: Mappable>(inout left: T?, right: (FromJSONMap, (inout T, FromJSONMap) -> Void)) {
+    if var a = left {
+        right.1(&a, right.0)
+    } else if var a = try? T(right.0) {
+        right.1(&a, right.0)
     }
 }
 
-func optionalBasicType<FieldType>(inout field: FieldType!, object: FieldType?) {
-    if let value = object {
-        field = value
+public func <-> <T: Mappable>(inout left: T!, right: (FromJSONMap, (inout T, FromJSONMap) -> Void)) {
+    if var a = left {
+        right.1(&a, right.0)
+    } else if var a = try? T(right.0) {
+        right.1(&a, right.0)
     }
 }
-

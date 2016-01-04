@@ -14,7 +14,7 @@ public class ResponseMapping<N:Mappable>: Mapping<N, FromJSONMap> {
     
     public func map(jsonDictionary JSON: [String : AnyObject]) -> N? {
         let map = FromJSONMap(JSON)
-        guard var object = N(map) else {
+        guard var object = try? N(map) else {
             return nil
         }
         mapFunction(&object, map)

@@ -6,13 +6,13 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
-public protocol JSONConvertable {
+public protocol JSONBasicConvertable {
     typealias JSON
     var jsonValue: JSON { get }
     init?(jsonObject: Any)
 }
 
-extension JSONConvertable {
+extension JSONBasicConvertable {
     public init?(jsonObject: Any) {
         if let value = jsonObject as? Self {
             self = value
@@ -22,7 +22,7 @@ extension JSONConvertable {
     }
 }
 
-extension String: JSONConvertable {
+extension String: JSONBasicConvertable {
     public typealias JSON = String
     
     public var jsonValue: JSON {
@@ -30,7 +30,7 @@ extension String: JSONConvertable {
     }
 }
 
-extension Int: JSONConvertable {
+extension Int: JSONBasicConvertable {
     public typealias JSON = Int
     
     public var jsonValue: JSON {
@@ -38,7 +38,7 @@ extension Int: JSONConvertable {
     }
 }
 
-extension Float: JSONConvertable {
+extension Float: JSONBasicConvertable {
     public typealias JSON = Float
     
     public var jsonValue: JSON {
@@ -46,7 +46,7 @@ extension Float: JSONConvertable {
     }
 }
 
-extension Double: JSONConvertable {
+extension Double: JSONBasicConvertable {
     public typealias JSON = Double
     
     public var jsonValue: JSON {
@@ -54,7 +54,7 @@ extension Double: JSONConvertable {
     }
 }
 
-extension Int64: JSONConvertable {
+extension Int64: JSONBasicConvertable {
     public typealias JSON = Int
     
     public var jsonValue: JSON {
@@ -62,7 +62,7 @@ extension Int64: JSONConvertable {
     }
 }
 
-extension Int32: JSONConvertable {
+extension Int32: JSONBasicConvertable {
     public typealias JSON = Int
     
     public var jsonValue: JSON {
@@ -70,7 +70,7 @@ extension Int32: JSONConvertable {
     }
 }
 
-extension Int16: JSONConvertable {
+extension Int16: JSONBasicConvertable {
     public typealias JSON = Int
     
     public var jsonValue: JSON {
@@ -78,7 +78,7 @@ extension Int16: JSONConvertable {
     }
 }
 
-extension Int8: JSONConvertable {
+extension Int8: JSONBasicConvertable {
     public typealias JSON = Int
     
     public var jsonValue: JSON {
@@ -86,7 +86,7 @@ extension Int8: JSONConvertable {
     }
 }
 
-extension Bool: JSONConvertable {
+extension Bool: JSONBasicConvertable {
     public typealias JSON = Bool
     
     public var jsonValue: JSON {
@@ -94,7 +94,7 @@ extension Bool: JSONConvertable {
     }
 }
 
-extension CollectionType where Generator.Element: JSONConvertable {
+extension CollectionType where Generator.Element: JSONBasicConvertable {
     public typealias JSON = [Generator.Element.JSON]
     
     public var jsonValue: JSON {
@@ -114,14 +114,12 @@ extension CollectionType where Generator.Element: JSONConvertable {
     }
 }
 
-extension Array where Element: JSONConvertable {   
+extension Array where Element: JSONBasicConvertable {   
     public init?(jsonObject: Any) {
+        print(jsonObject)
         if let objects = jsonObject as? [AnyObject] {
             self = objects.flatMap {
-                guard let jsonRepresentable = $0 as? Element.Type else {
-                    return nil
-                }
-                return Element(jsonObject: jsonRepresentable)
+                return Element(jsonObject: $0)
             }
             return
         }

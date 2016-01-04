@@ -62,6 +62,26 @@ class RequestMappingTests: XCTestCase {
 //        XCTAssertEqual(mappedTest.impEnumKey, value)
     }
     
+    func testArrayMapping() {
+        
+        let value = "value"
+        var arrValue = [value, value]
+        let map = ToJSONMap()
+        arrValue <-> map
+        
+        print(map.value()!)
+        let fromJSONMap = FromJSONMap(map.value())
+        print(fromJSONMap.value()!)
+        var mapped: [String] = []
+        mapped <-> fromJSONMap
+        
+        XCTAssertEqual(mapped.count, arrValue.count)
+        for i in 0..<mapped.count {
+            XCTAssertEqual(mapped[i], arrValue[i])
+        }
+    }
+
+    
     func testMappableArgument() {
         let map = ToJSONMap()
         let value = "test"
