@@ -6,19 +6,6 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
-private extension Array where Element: JSONBasicConvertable {
-    init?(jsonObject: Any) {
-        print(jsonObject)
-        if let objects = jsonObject as? [AnyObject] {
-            self = objects.flatMap {
-                return Element(jsonObject: $0)
-            }
-            return
-        }
-        return nil
-    }
-}
-
 public struct FromJSONMap: Map {
     
     private let json: AnyObject
@@ -63,59 +50,72 @@ public func <-> <T: JSONBasicConvertable>(inout left: T?, right: FromJSONMap) {
 }
 
 public func <-> <T: JSONBasicConvertable>(inout left: T!, right: FromJSONMap) {
-    guard let value: AnyObject = right.value(), a = T(jsonObject: value) else {
-        return
+    if let value: AnyObject = right.value(), a = T(jsonObject: value) {
+        left = a
     }
-    left = a
 }
 
 public func <-> <T: JSONBasicConvertable>(inout left: T, right: FromJSONMap) {
-    guard let value: AnyObject = right.value(), a = T(jsonObject: value) else {
-        return
-    }
-    left = a
-}
-
-public func <-> <T: JSONBasicConvertable>(inout left: [T], right: FromJSONMap) {
-    guard let value: AnyObject = right.value() else {
-        return
-    }
-    let a = Array<T>(jsonObject: value)
-    left = a ?? left
-}
-
-public func <-> <T: JSONBasicConvertable>(inout left: [T]?, right: FromJSONMap) {
-    guard let value: AnyObject = right.value() else {
-        return
-    }
-    let a = Array<T>(jsonObject: value)
-    left = a ?? left
-}
-
-public func <-> <T: JSONBasicConvertable>(inout left: [T]!, right: FromJSONMap) {
-    guard let value: AnyObject = right.value() else {
-        return
-    }
-    let a = Array<T>(jsonObject: value)
-    left = a ?? left
-}
-
-public func <-> <T: Mappable>(inout left: T, right: (FromJSONMap, (inout T, FromJSONMap) -> Void)) {
-    right.1(&left, right.0)
-}
-
-public func <-> <T: Mappable>(inout left: T?, right: (FromJSONMap, (inout T, FromJSONMap) -> Void)) {
-    if var a = left {
-        right.1(&a, right.0)
-    } else if var a = try? T(right.0) {
-        right.1(&a, right.0)
+    if let value: AnyObject = right.value(), a = T(jsonObject: value) {
+        left = a
     }
 }
 
-public func <-> <T: Mappable>(inout left: T!, right: (FromJSONMap, (inout T, FromJSONMap) -> Void)) {
-    if var a = left {
-        right.1(&a, right.0)
-    } else if var a = try? T(right.0) {
-        right.1(&a, right.0)
+public func <-> <T: Mappable>(inout left: T, right: (FromJSONMap, Mapping<T, FromJSONMap>)) {
+    
+}
+
+public func <-> <T: Mappable>(inout left: T!, right: (FromJSONMap, Mapping<T, FromJSONMap>)) {
+    
+}
+
+public func <-> <T: Mappable>(inout left: T?, right: (FromJSONMap, Mapping<T, FromJSONMap>)) {
+    
+}
+
+public func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T, right: (FromJSONMap, Transform)) {
+    if let a = right.1.transformFromJSON(right.0.currentValue) {
+        left = a
     }
 }
+
+public func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T?, right: (FromJSONMap, Transform) ) {
+    if let a = right.1.transformFromJSON(right.0.currentValue) {
+        left = a
+    }
+}
+
+public func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T!, right: (FromJSONMap, Transform)) {
+    if let a = right.1.transformFromJSON(right.0.currentValue) {
+        left = a
+    }
+}
+
+//if right.0.mappingType == MappingType.FromJSON {
+//    let value: T? = right.1.transformFromJSON(right.0.currentValue)
+//    FromJSON.optionalBasicType(&left, object: value)
+//} else {
+//    let value: Transform.JSON? = right.1.transformToJSON(left)
+//    ToJSON.optionalBasicType(value, map: right.0)
+//}
+
+
+//public func <-> <T: Mappable>(inout left: T, right: (FromJSONMap, (inout T, FromJSONMap) -> Void)) {
+//    right.1(&left, right.0)
+//}
+//
+//public func <-> <T: Mappable>(inout left: T?, right: (FromJSONMap, (inout T, FromJSONMap) -> Void)) {
+//    if var a = left {
+//        right.1(&a, right.0)
+//    } else if var a = try? T(right.0) {
+//        right.1(&a, right.0)
+//    }
+//}
+//
+//public func <-> <T: Mappable>(inout left: T!, right: (FromJSONMap, (inout T, FromJSONMap) -> Void)) {
+//    if var a = left {
+//        right.1(&a, right.0)
+//    } else if var a = try? T(right.0) {
+//        right.1(&a, right.0)
+//    }
+//}

@@ -34,48 +34,63 @@ class RequestMappingTests: XCTestCase {
         XCTAssertEqual(mappedTest.impString, value)
         XCTAssertNil(mappedTest.null)
         XCTAssertNil(mappedTest.emptyKey)
-        print(value)
     }
     
     func testNestedMapping() {
-        
-    }
-    
-    func testCollectionMapping() {
-        
-        var test = Test(value: "test")
-        func testArrayMapping(inout test: Test, map: ToJSONMap) {
-            test.array <-> map["array"]
-            test.optArray <-> map["optArray"]
-            test.impArray <-> map["impArray"]
+        func testNestedMapping<T:Map>(inout test: Test, map: T) {
+            test.string <-> map["nested"]["string"]
         }
         
         let map = ToJSONMap()
         
-//        arrValue <-> map
-        
-//        let fromJSONMap = FromJSONMap(map.value())
-//        print(fromJSONMap.value()!)
-//        var mapped: [String] = []
-//        mapped <-> fromJSONMap
-//        
-//        XCTAssertEqual(mapped.count, arrValue.count)
-//        for i in 0..<mapped.count {
-//            XCTAssertEqual(mapped[i], arrValue[i])
-//        }
-    }
-
-    
-    func testMappable() {
-        let map = ToJSONMap()
-        let value = "test"
         var test = Test(value: "test")
-        mappableOperatorMapping(&test, map: map)
+        testNestedMapping(&test, map: map)
         let dictionary: [String : AnyObject]! = map.value()
         let fromJSON = FromJSONMap(dictionary)
         
         var mappedTest = Test(value: "")
-        mappableOperatorMapping(&mappedTest, map: fromJSON)
-        XCTAssertEqual(mappedTest.subTest.string, value)
+        testNestedMapping(&mappedTest, map: fromJSON)
+        XCTAssertEqual(mappedTest.string, test.string)
     }
+    
+//    func testCollectionMapping() {
+//        var test = Test(value: "test")
+//        func testArrayMapping(inout test: Test, map: ToJSONMap) {
+//            test.array <-> map["array"]
+//            test.optArray <-> map["optArray"]
+//            test.impArray <-> map["impArray"]
+//        }
+//        
+//        func fromJSONArrayMapping(inout test: Test, map: FromJSONMap) {
+//            test.array <-> map["array"]
+//            test.optArray <-> map["optArray"]
+//            test.impArray <-> map["impArray"]
+//        }
+//        
+//        let map = ToJSONMap()
+//        
+//        testArrayMapping(&test, map: map)
+//        
+//        let fromJSONMap = FromJSONMap(map.value())
+//        var mappedTest = Test(fromJSONMap)
+//        fromJSONArrayMapping(&mappedTest, map: fromJSONMap)
+//
+//        XCTAssertEqual(test.array.count, mappedTest.array.count)
+//        XCTAssertEqual(test.optArray?.count, mappedTest.optArray?.count)
+//        XCTAssertEqual(test.impArray.count, mappedTest.impArray.count)
+//    }
+//
+    
+//    func testMappable() {
+//        let map = ToJSONMap()
+//        let value = "test"
+//        var test = Test(value: "test")
+//        mappableOperatorMapping(&test, map: map)
+//        let dictionary: [String : AnyObject]! = map.value()
+//        let fromJSON = FromJSONMap(dictionary)
+//        
+//        var mappedTest = Test(value: "")
+//        mappableOperatorMapping(&mappedTest, map: fromJSON)
+//        XCTAssertEqual(mappedTest.subTest.string, value)
+//    }
 }

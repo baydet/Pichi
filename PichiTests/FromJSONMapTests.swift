@@ -31,32 +31,32 @@ class ResponseMappingTests: XCTestCase {
         XCTAssertNil(test.emptyKey)
     }
     
-    func testArrayMapping() {
-        
-        let value = "value"
-        let arrValue = [value, value]
-        let JSON : [String : AnyObject] = [
-            "arr" : arrValue
-        ]
-        let map = FromJSONMap(JSON)
-        var mapped: [String] = [""]
-        mapped <-> map["arr"]
-        XCTAssertEqual(mapped.count, arrValue.count)
-        for i in 0..<mapped.count {
-            XCTAssertEqual(mapped[i], arrValue[i])
-        }
-    }
+//    func testArrayMapping() {
+//        
+//        let value = "value"
+//        let arrValue = [value, value]
+//        let JSON : [String : AnyObject] = [
+//            "arr" : arrValue
+//        ]
+//        let map = FromJSONMap(JSON)
+//        var mapped: [String] = [""]
+//        mapped <-> map["arr"]
+//        XCTAssertEqual(mapped.count, arrValue.count)
+//        for i in 0..<mapped.count {
+//            XCTAssertEqual(mapped[i], arrValue[i])
+//        }
+//    }
     
-    func testMappableArgument() {
-        let value = "value"
-        let JSON: [String : AnyObject] = [
-            "subtest" : ["string" : value]
-        ]
-        
-        let map = FromJSONMap(JSON)
-        var test = Test(map)
-        mappableOperatorMapping(&test, map: map)
-        XCTAssertEqual(test.subTest.string, value)
-    }
+//    func testMappableArgument() {
+//        let value = "value"
+//        let JSON: [String : AnyObject] = [
+//            "subtest" : ["string" : value]
+//        ]
+//        
+//        let map = FromJSONMap(JSON)
+//        var test = Test(map)
+//        mappableOperatorMapping(&test, map: map)
+//        XCTAssertEqual(test.subTest.string, value)
+//    }
     
 }

@@ -8,9 +8,9 @@
 
 public final class RequestMapper<N:Mappable>: Mapping<N, ToJSONMap> {
 
-    required public init(mapFunction: MappingFunction) {
-        super.init(mapFunction: mapFunction)
-    }
+//    required public init(mapFunction: MappingFunction) {
+//        super.init(mapFunction: mapFunction)
+//    }
 
     public func map(var object: N) -> [String : AnyObject]? {
         let mapping = ToJSONMap()

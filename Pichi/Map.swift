@@ -29,9 +29,13 @@ public protocol Map {
     func <-> <T: JSONBasicConvertable>(inout left: T?, right: Self)
     func <-> <T: JSONBasicConvertable>(inout left: T!, right: Self)
     
-    func <-> <T: Mappable>(inout left: T, right: (Self, (inout T, Self) -> Void))
-    func <-> <T: Mappable>(inout left: T!, right: (Self, (inout T, Self) -> Void))
-    func <-> <T: Mappable>(inout left: T?, right: (Self, (inout T, Self) -> Void))
+//    func <-> <T: Mappable>(inout left: T, right: (Self, Mapping<T, Self>))
+//    func <-> <T: Mappable>(inout left: T!, right: (Self, Mapping<T, Self>))
+//    func <-> <T: Mappable>(inout left: T?, right: (Self, Mapping<T, Self>))
+//
+    func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T, right: (Self, Transform))
+    func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T?, right: (Self, Transform))
+    func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T!, right: (Self, Transform))
 }
 
 /**
@@ -44,11 +48,32 @@ public protocol Mappable {
 /**
  *  Root class for mapping
  */
-public class Mapping<N: Mappable, T: Map> {
+public class Mapping<N: Mappable, T: Map>/*: TransformType*/ {
 	public typealias MappingFunction = (inout N, T) -> Void
+    public typealias Object = N
+    public typealias JSON = [String : AnyObject]
+    
 	let mapFunction: MappingFunction
 
-	required public init(mapFunction:  MappingFunction) {
+    required public init(mapFunction:  MappingFunction) {
 		self.mapFunction = mapFunction
 	}
+    
+//    public func transformFromJSON(value: AnyObject?) -> Object? {
+//        let map = FromJSONMap(value)
+//        guard var object = try? N(map) else {
+//            return nil
+//        }
+//        mapFunction(&object, map)
+//        return object
+//    }
+//    
+//    public func transformToJSON(value: Object?) -> JSON? {
+//        let map = ToJSONMap()
+//        guard var object = value else {
+//            return nil
+//        }
+//        self.mapFunction(&object, map)
+//        return map.value()
+//    }
 }

@@ -69,9 +69,9 @@ func testMapping<T:Map>(inout test: Test, map: T) {
     test.emptyKey <-> map[""]
 }
 
-func mappableOperatorMapping<T:Map>(inout test: Test, map: T) {
-    test.subTest <-> (map["subtest"], subtestMapping)
-}
+//func mappableOperatorMapping<T:Map>(inout test: Test, map: T) {
+//    test.subTest <-> (map["subtest"], subtestMapping)
+//}
 
 func rawRepresentableMapping<T:Map>(inout test: Test, map: T) {
 //    test.enumKey <-> map["enum"]

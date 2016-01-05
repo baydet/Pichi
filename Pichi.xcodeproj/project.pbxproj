@@ -20,6 +20,7 @@
 		8625B1921C2596EC0064B09B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8625B1911C2596EC0064B09B /* CoreData.framework */; };
 		8625B1951C25973E0064B09B /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1941C25973E0064B09B /* Map.swift */; };
 		86E5A70D1C28937A00DB061E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E5A70C1C28937A00DB061E /* Model.swift */; };
+		D3605FD61C3BF8B9005F5AA1 /* CollectionTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3605FD51C3BF8B9005F5AA1 /* CollectionTransforms.swift */; };
 		D38A96611C3ABC500034A291 /* JSONRepresentableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38A96601C3ABC500034A291 /* JSONRepresentableTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		8625B1911C2596EC0064B09B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8625B1941C25973E0064B09B /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		86E5A70C1C28937A00DB061E /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		D3605FD51C3BF8B9005F5AA1 /* CollectionTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTransforms.swift; sourceTree = "<group>"; };
 		D38A96601C3ABC500034A291 /* JSONRepresentableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRepresentableTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				8625B1841C2596D40064B09B /* JSONRepresentable.swift */,
 				8625B1851C2596D40064B09B /* FromJSONMap.swift */,
 				8625B1861C2596D40064B09B /* ToJSONMap.swift */,
+				D3605FD51C3BF8B9005F5AA1 /* CollectionTransforms.swift */,
 				8625B16A1C2596C20064B09B /* Pichi.h */,
 				8625B16C1C2596C20064B09B /* Info.plist */,
 			);
@@ -236,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3605FD61C3BF8B9005F5AA1 /* CollectionTransforms.swift in Sources */,
 				8625B18A1C2596D40064B09B /* JSONRepresentable.swift in Sources */,
 				8625B1891C2596D40064B09B /* ManagedResponseMapping.swift in Sources */,
 				8625B1881C2596D40064B09B /* RequestMapping.swift in Sources */,
