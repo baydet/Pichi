@@ -10,47 +10,46 @@ public protocol JSONBasicConvertable {
     typealias JSON
     var jsonValue: JSON { get }
     init?(jsonObject: Any)
+    init?(_: JSON)
 }
 
-extension JSONBasicConvertable {
-    public init?(jsonObject: Any) {
-        if let value = jsonObject as? Self {
-            self = value
+public extension JSONBasicConvertable {
+    init?(jsonObject: Any) {
+        if let value = jsonObject as? JSON {
+            self.init(value)
             return
         }
         return nil
     }
 }
 
-extension String: JSONBasicConvertable {
-    public typealias JSON = String
-    
-    public var jsonValue: JSON {
+public extension JSONBasicConvertable where JSON == Self {
+    var jsonValue: JSON {
         return self
     }
+}
+
+extension String: JSONBasicConvertable {
+    public typealias JSON = String
 }
 
 extension Int: JSONBasicConvertable {
     public typealias JSON = Int
-    
-    public var jsonValue: JSON {
-        return self
-    }
 }
 
 extension Float: JSONBasicConvertable {
     public typealias JSON = Float
-    
-    public var jsonValue: JSON {
-        return self
-    }
+}
+
+extension Bool: JSONBasicConvertable {
+    public typealias JSON = Bool
 }
 
 extension Double: JSONBasicConvertable {
-    public typealias JSON = Double
+    public typealias JSON = Float
     
     public var jsonValue: JSON {
-        return self
+        return JSON(self)
     }
 }
 
@@ -83,13 +82,5 @@ extension Int8: JSONBasicConvertable {
     
     public var jsonValue: JSON {
         return JSON(self)
-    }
-}
-
-extension Bool: JSONBasicConvertable {
-    public typealias JSON = Bool
-    
-    public var jsonValue: JSON {
-        return self
     }
 }
