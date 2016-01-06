@@ -28,8 +28,6 @@ struct Test: Mappable {
     var optEnumKey: EnumKey? = nil
     var impEnumKey: EnumKey! = nil
     
-    var subTest: SubTest = SubTest()
-    
     init<T:Map>(_ map: T) {
         
     }
@@ -38,35 +36,9 @@ struct Test: Mappable {
         string = value
         optString = value
         impString = value
-        subTest.string = value
         
         array = [value, value]
         optArray = array
         impArray = array
     }
-}
-
-struct SubTest: Mappable {
-    init<T:Map>(_ map: T) {
-        
-    }
-    
-    var string: String = ""
-    
-    init() {
-    }
-}
-
-func subtestMapping<T:Map>(inout test: SubTest, map: T) {
-    test.string <-> map["string"]
-}
-
-//func mappableOperatorMapping<T:Map>(inout test: Test, map: T) {
-//    test.subTest <-> (map["subtest"], subtestMapping)
-//}
-
-func rawRepresentableMapping<T:Map>(inout test: Test, map: T) {
-//    test.enumKey <-> map["enum"]
-//    test.optEnumKey <-> map["enum"]
-//    test.impEnumKey <-> map["enum"]
 }
