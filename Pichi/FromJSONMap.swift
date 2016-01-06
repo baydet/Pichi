@@ -61,18 +61,6 @@ public func <-> <T: JSONBasicConvertable>(inout left: T, right: FromJSONMap) {
     }
 }
 
-public func <-> <T: Mappable>(inout left: T, right: (FromJSONMap, Mapping<T, FromJSONMap>)) {
-    
-}
-
-public func <-> <T: Mappable>(inout left: T!, right: (FromJSONMap, Mapping<T, FromJSONMap>)) {
-    
-}
-
-public func <-> <T: Mappable>(inout left: T?, right: (FromJSONMap, Mapping<T, FromJSONMap>)) {
-    
-}
-
 public func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T, right: (FromJSONMap, Transform)) {
     if let a = right.1.transformFromJSON(right.0.currentValue) {
         left = a
@@ -90,32 +78,3 @@ public func <-> <T, Transform: TransformType where Transform.Object == T>(inout 
         left = a
     }
 }
-
-//if right.0.mappingType == MappingType.FromJSON {
-//    let value: T? = right.1.transformFromJSON(right.0.currentValue)
-//    FromJSON.optionalBasicType(&left, object: value)
-//} else {
-//    let value: Transform.JSON? = right.1.transformToJSON(left)
-//    ToJSON.optionalBasicType(value, map: right.0)
-//}
-
-
-//public func <-> <T: Mappable>(inout left: T, right: (FromJSONMap, (inout T, FromJSONMap) -> Void)) {
-//    right.1(&left, right.0)
-//}
-//
-//public func <-> <T: Mappable>(inout left: T?, right: (FromJSONMap, (inout T, FromJSONMap) -> Void)) {
-//    if var a = left {
-//        right.1(&a, right.0)
-//    } else if var a = try? T(right.0) {
-//        right.1(&a, right.0)
-//    }
-//}
-//
-//public func <-> <T: Mappable>(inout left: T!, right: (FromJSONMap, (inout T, FromJSONMap) -> Void)) {
-//    if var a = left {
-//        right.1(&a, right.0)
-//    } else if var a = try? T(right.0) {
-//        right.1(&a, right.0)
-//    }
-//}

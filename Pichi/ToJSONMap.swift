@@ -6,19 +6,9 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
-private extension CollectionType where Generator.Element: JSONBasicConvertable {
-    typealias JSON = [Generator.Element.JSON]
-
-    var jsonValue: JSON {
-        return self.map {
-            $0.jsonValue
-        }
-    }
-}
-
 public final class ToJSONMap: Map {
     
-    var jsonDictionary: AnyObject = [:]
+    var json: AnyObject? = [:]
     private let key: String?
     let parent: ToJSONMap?
     
@@ -37,24 +27,30 @@ public final class ToJSONMap: Map {
     }
     
     public func value<T>() -> T? {
-        return jsonDictionary as? T
+        return json as? T
     }
     
-    func setValue(value: AnyObject?) {
-        if let key = key, var jsonDictionary = jsonDictionary as? [String : AnyObject] where !key.isEmpty {
-            jsonDictionary[key] = value
-            self.jsonDictionary = jsonDictionary
-        }
-        if let parent = parent {
-            parent.setValue(jsonDictionary)
-        }
-        if let dictionary = value as? [String : AnyObject], var jsonDictionary = jsonDictionary as? [String : AnyObject] {
-            dictionary.forEach {
-                jsonDictionary[$0] = $1
+    private func setValue(value: AnyObject?) {
+        defer {
+            if let parent = parent {
+                parent.setValue(json)
             }
-            self.jsonDictionary = jsonDictionary
-        } else if let array = value as? [AnyObject] {
-            self.jsonDictionary = array
+        }
+        if var json = json as? [String : AnyObject]  {
+            if let key = key where !key.isEmpty {
+                json[key] = value
+                self.json = json
+                return
+            } else if let dictionary = value as? [String : AnyObject] {
+                dictionary.forEach {
+                    json[$0] = $1
+                }
+                self.json = json
+                return
+            }
+        }
+        if let array = value as? [AnyObject] {
+            self.json = array
         }
     }
 }
@@ -73,42 +69,14 @@ public func <-> <T: JSONBasicConvertable>(inout left: T!, right: ToJSONMap) {
     right.setValue(left.jsonValue as? AnyObject)
 }
 
-public func <-> <T: Mappable>(inout left: T, right: (ToJSONMap, Mapping<T, ToJSONMap>)) {
-    
-}
-
-public func <-> <T: Mappable>(inout left: T!, right: (ToJSONMap, Mapping<T, ToJSONMap>)) {
-    
-}
-
-public func <-> <T: Mappable>(inout left: T?, right: (ToJSONMap, Mapping<T, ToJSONMap>)) {
-    
-}
-
 public func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T, right: (ToJSONMap, Transform)) {
-    
+    right.0.setValue(right.1.transformToJSON(left) as? AnyObject)
 }
 
 public func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T?, right: (ToJSONMap, Transform)) {
-    
+    right.0.setValue(right.1.transformToJSON(left) as? AnyObject)
 }
 
 public func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T!, right: (ToJSONMap, Transform)) {
-    
+    right.0.setValue(right.1.transformToJSON(left) as? AnyObject)
 }
-
-
-//
-////MARK: Collection operators
-//
-//public func <-> <S: CollectionType where S.Generator.Element: JSONBasicConvertable>(inout left: S, right: ToJSONMap) {
-//    right.setValue(left.jsonValue as? AnyObject)
-//}
-//
-//public func <-> <S: CollectionType where S.Generator.Element: JSONBasicConvertable>(inout left: S?, right: ToJSONMap) {
-//    right.setValue(left?.jsonValue as? AnyObject)
-//}
-//
-//public func <-> <S: CollectionType where S.Generator.Element: JSONBasicConvertable>(inout left: S!, right: ToJSONMap) {
-//    right.setValue(left.jsonValue as? AnyObject)
-//}

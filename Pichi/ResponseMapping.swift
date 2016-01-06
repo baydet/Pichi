@@ -6,36 +6,19 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
-public class ResponseMapping<N:Mappable>: Mapping<N, FromJSONMap> {
+public class ResponseMapping<N:Mappable>: DictionaryMapping {
+    
+    public typealias MappingFunction = (inout Object, FromJSONMap) -> Void
+    public typealias Object = N
+    public typealias JSON = [String : AnyObject]
     
     required public init(mapFunction: MappingFunction) {
-        super.init(mapFunction: mapFunction)
+        self.mapFunction = mapFunction
     }
     
-    public func map(jsonDictionary JSON: [String : AnyObject]) -> N? {
-        let map = FromJSONMap(JSON)
-        guard var object = try? N(map) else {
-            return nil
-        }
-        mapFunction(&object, map)
-        return object
-    }
+    public let mapFunction: MappingFunction
     
-    public func map(jsonArray JSON: [[String : AnyObject]]) -> [N?] {
-        return JSON.map {
-            return self.map(jsonDictionary: $0)
-        }
-    }
-}
-
-/// For RequestOperation usage
-extension ResponseMapping {
-    public func map(JSON: AnyObject) -> Any? {
-        if let JSON = JSON as? [String : AnyObject] {
-            return map(jsonDictionary: JSON)
-        } else if let JSON = JSON as? [[String : AnyObject]] {
-            return map(jsonArray: JSON)
-        }
+    public func transformFromJSON(value: AnyObject?) -> Object? {
         return nil
     }
 }

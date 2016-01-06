@@ -6,33 +6,23 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
-public final class RequestMapper<N:Mappable>: Mapping<N, ToJSONMap> {
+public final class RequestMapper<N:Mappable>: DictionaryMapping {
+    public typealias MappingFunction = (inout Object, ToJSONMap) -> Void
+    public typealias Object = N
+    public typealias JSON = [String : AnyObject]
 
-//    required public init(mapFunction: MappingFunction) {
-//        super.init(mapFunction: mapFunction)
-//    }
-
-    public func map(var object: N) -> [String : AnyObject]? {
-        let mapping = ToJSONMap()
-        self.mapFunction(&object, mapping)
-        return mapping.value()
+    required public init(mapFunction: MappingFunction) {
+        self.mapFunction = mapFunction
     }
     
-    public func map(objects: [N]) -> [[String : AnyObject]]? {
-        return objects.flatMap {
-            map($0)
+    public let mapFunction: MappingFunction
+    
+    public func transformToJSON(value: Object?) -> JSON? {
+        let map = ToJSONMap()
+        guard var object = value else {
+            return nil
         }
-    }
-}
-
-/// For RequestOperation usage
-extension RequestMapper {
-    public func map(object: AnyObject?) -> AnyObject? {
-        if let object = object as? N {
-            return map(object)
-        } else if let objects = object as? [N] {
-            return map(objects)
-        }
-        return nil
+        self.mapFunction(&object, map)
+        return map.value()
     }
 }

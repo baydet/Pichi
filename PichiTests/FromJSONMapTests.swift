@@ -9,9 +9,30 @@
 import XCTest
 import Pichi
 
-class ResponseMappingTests: XCTestCase {
+struct SimpleTransform<T>: TransformType {
+    typealias Object = T
+    typealias JSON = T
+    
+    func transformFromJSON(value: AnyObject?) -> Object? {
+        return value as? Object
+    }
+    
+    func transformToJSON(value: Object?) -> JSON? {
+        return value
+    }
+}
+
+class FromJSONMapTests: XCTestCase {
     
     func testBasicTypes() {
+        
+        func testMapping<T:Map>(inout test: Test, map: T) {
+            test.string <-> map["string"]
+            test.optString <-> map["optString"]
+            test.impString <-> map["impString"]
+            test.null <-> map["null"]
+            test.emptyKey <-> map[""]
+        }
         
         let value = "value"
         let JSON : [String : AnyObject] = [
@@ -31,32 +52,28 @@ class ResponseMappingTests: XCTestCase {
         XCTAssertNil(test.emptyKey)
     }
     
-//    func testArrayMapping() {
-//        
-//        let value = "value"
-//        let arrValue = [value, value]
-//        let JSON : [String : AnyObject] = [
-//            "arr" : arrValue
-//        ]
-//        let map = FromJSONMap(JSON)
-//        var mapped: [String] = [""]
-//        mapped <-> map["arr"]
-//        XCTAssertEqual(mapped.count, arrValue.count)
-//        for i in 0..<mapped.count {
-//            XCTAssertEqual(mapped[i], arrValue[i])
-//        }
-//    }
-    
-//    func testMappableArgument() {
-//        let value = "value"
-//        let JSON: [String : AnyObject] = [
-//            "subtest" : ["string" : value]
-//        ]
-//        
-//        let map = FromJSONMap(JSON)
-//        var test = Test(map)
-//        mappableOperatorMapping(&test, map: map)
-//        XCTAssertEqual(test.subTest.string, value)
-//    }
+    func testTransformTypes() {
+        let value = "value"
+        let JSON : [String : AnyObject] = [
+            "string" : value,
+            "optString" : value,
+            "impString" : value,
+        ]
+        
+        func testMapping<T:Map>(inout test: Test, map: T) {
+            test.string <-> (map["string"], SimpleTransform<String>())
+            test.optString <-> (map["optString"], SimpleTransform<String>())
+            test.impString <-> (map["impString"], SimpleTransform<String>())
+        }
+        
+        let map = FromJSONMap(JSON)
+        var test = Test(map)
+        testMapping(&test, map: map)
+        XCTAssertEqual(test.string, value)
+        XCTAssertEqual(test.optString, value)
+        XCTAssertEqual(test.impString, value)
+        XCTAssertNil(test.null)
+        XCTAssertNil(test.emptyKey)
+    }
     
 }

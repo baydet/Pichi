@@ -61,14 +61,6 @@ func subtestMapping<T:Map>(inout test: SubTest, map: T) {
     test.string <-> map["string"]
 }
 
-func testMapping<T:Map>(inout test: Test, map: T) {
-    test.string <-> map["string"]
-    test.optString <-> map["optString"]
-    test.impString <-> map["impString"]
-    test.null <-> map["null"]
-    test.emptyKey <-> map[""]
-}
-
 //func mappableOperatorMapping<T:Map>(inout test: Test, map: T) {
 //    test.subTest <-> (map["subtest"], subtestMapping)
 //}
