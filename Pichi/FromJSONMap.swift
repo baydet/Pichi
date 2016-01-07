@@ -62,19 +62,19 @@ public func <-> <T: JSONBasicConvertable>(inout left: T, right: FromJSONMap) {
 }
 
 public func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T, right: (FromJSONMap, Transform)) {
-    if let a = right.1.transformFromJSON(right.0.currentValue) {
+    if let a = right.1.transformFromJSON(right.0.currentValue as? Transform.JSON) {
         left = a
     }
 }
 
 public func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T?, right: (FromJSONMap, Transform) ) {
-    if let a = right.1.transformFromJSON(right.0.currentValue) {
+    if let a = right.1.transformFromJSON(right.0.currentValue as? Transform.JSON) {
         left = a
     }
 }
 
 public func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T!, right: (FromJSONMap, Transform)) {
-    if let a = right.1.transformFromJSON(right.0.currentValue) {
+    if let a = right.1.transformFromJSON(right.0.currentValue as? Transform.JSON) {
         left = a
     }
 }

@@ -13,8 +13,8 @@ struct SimpleTransform<T>: TransformType {
     typealias Object = T
     typealias JSON = T
     
-    func transformFromJSON(value: AnyObject?) -> Object? {
-        return value as? Object
+    func transformFromJSON(value: JSON?) -> Object? {
+        return value
     }
     
     func transformToJSON(value: Object?) -> JSON? {

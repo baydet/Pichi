@@ -14,7 +14,7 @@ public protocol TransformType {
     typealias Object
     typealias JSON
     
-    func transformFromJSON(value: AnyObject?) -> Object?
+    func transformFromJSON(value: JSON?) -> Object?
     func transformToJSON(value: Object?) -> JSON?
 }
 
@@ -28,7 +28,7 @@ public protocol Map {
     func <-> <T: JSONBasicConvertable>(inout left: T, right: Self)
     func <-> <T: JSONBasicConvertable>(inout left: T?, right: Self)
     func <-> <T: JSONBasicConvertable>(inout left: T!, right: Self)
-
+    
     func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T, right: (Self, Transform))
     func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T?, right: (Self, Transform))
     func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T!, right: (Self, Transform))
@@ -52,7 +52,7 @@ public protocol DictionaryMapping: TransformType {
 
 public extension DictionaryMapping {
     
-    func transformFromJSON(value: AnyObject?) -> Object? {
+    func transformFromJSON(value: JSON?) -> Object? {
         return nil
     }
     

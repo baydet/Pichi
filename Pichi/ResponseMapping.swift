@@ -18,7 +18,7 @@ public class ResponseMapping<N:Mappable>: DictionaryMapping {
     
     public let mapFunction: MappingFunction
     
-    public func transformFromJSON(value: AnyObject?) -> Object? {
+    public func transformFromJSON(value: JSON?) -> Object? {
         return nil
     }
 }

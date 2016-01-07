@@ -20,8 +20,38 @@ public struct BasicArrayTransform<T: JSONBasicConvertable>: TransformType{
     public typealias Object = [T]
     public typealias JSON = [T.JSON]
     
-    public func transformFromJSON(value: AnyObject?) -> Object? {
-        return nil
+    public func transformFromJSON(value: JSON?) -> Object? {
+        guard let array = value else {
+            return nil
+        }
+        return array.flatMap {
+            T($0)
+        }
+    }
+}
+
+public struct TransformTypeArrayTransform<T: TransformType>: TransformType{
+    public typealias Object = [T.Object]
+    public typealias JSON = [T.JSON]
+    public let transformType: T
+    
+    init(_ transform: T) {
+        self.transformType = transform
+    }
+    
+    public func transformFromJSON(value: JSON?) -> Object? {
+        guard let array = value else {
+            return nil
+        }
+        return array.flatMap {
+            self.transformType.transformFromJSON($0)
+        }
+    }
+
+    public func transformToJSON(value: Object?) -> JSON? {
+        return value?.flatMap {
+            self.transformType.transformToJSON($0)
+        }
     }
 }
 
@@ -29,8 +59,10 @@ public struct BasicSetTransform<T where T: Hashable, T: JSONBasicConvertable>: T
     public typealias Object = Set<T>
     public typealias JSON = [T.JSON]
     
-    public func transformFromJSON(value: AnyObject?) -> Object? {
-        return nil
+    public func transformFromJSON(value: JSON?) -> Object? {
+        guard let objects = BasicArrayTransform<T>().transformFromJSON(value) else {
+            return nil
+        }
+        return Set<T>(objects)
     }
 }
-
