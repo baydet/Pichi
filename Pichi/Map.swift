@@ -6,8 +6,6 @@
 //  Copyright © 2015 baydet. All rights reserved.
 //
 
-import CoreData
-
 infix operator <-> {}
 
 public protocol TransformType {

@@ -42,3 +42,16 @@ struct Test: Mappable {
         impArray = array
     }
 }
+
+struct SimpleTransform<T>: TransformType {
+    typealias Object = T
+    typealias JSON = T
+    
+    func transformFromJSON(value: JSON?) -> Object? {
+        return value
+    }
+    
+    func transformToJSON(value: Object?) -> JSON? {
+        return value
+    }
+}

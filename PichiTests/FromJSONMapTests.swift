@@ -9,19 +9,6 @@
 import XCTest
 import Pichi
 
-struct SimpleTransform<T>: TransformType {
-    typealias Object = T
-    typealias JSON = T
-    
-    func transformFromJSON(value: JSON?) -> Object? {
-        return value
-    }
-    
-    func transformToJSON(value: Object?) -> JSON? {
-        return value
-    }
-}
-
 class FromJSONMapTests: XCTestCase {
     
     func testBasicTypes() {

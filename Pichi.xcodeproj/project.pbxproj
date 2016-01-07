@@ -20,6 +20,8 @@
 		8625B1921C2596EC0064B09B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8625B1911C2596EC0064B09B /* CoreData.framework */; };
 		8625B1951C25973E0064B09B /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1941C25973E0064B09B /* Map.swift */; };
 		86E5A70D1C28937A00DB061E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E5A70C1C28937A00DB061E /* Model.swift */; };
+		86F207CE1C3EFF6100F3CEFF /* CollectionTransformsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F207CD1C3EFF6100F3CEFF /* CollectionTransformsTests.swift */; };
+		86F9C7881C3EC09600F5DD66 /* DictionaryMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F9C7871C3EC09600F5DD66 /* DictionaryMapperTests.swift */; };
 		D3605FD61C3BF8B9005F5AA1 /* CollectionTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3605FD51C3BF8B9005F5AA1 /* CollectionTransforms.swift */; };
 		D38A96611C3ABC500034A291 /* JSONRepresentableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38A96601C3ABC500034A291 /* JSONRepresentableTests.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +53,8 @@
 		8625B1911C2596EC0064B09B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8625B1941C25973E0064B09B /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		86E5A70C1C28937A00DB061E /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		86F207CD1C3EFF6100F3CEFF /* CollectionTransformsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTransformsTests.swift; sourceTree = "<group>"; };
+		86F9C7871C3EC09600F5DD66 /* DictionaryMapperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryMapperTests.swift; sourceTree = "<group>"; };
 		D3605FD51C3BF8B9005F5AA1 /* CollectionTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTransforms.swift; sourceTree = "<group>"; };
 		D38A96601C3ABC500034A291 /* JSONRepresentableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRepresentableTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,6 +122,8 @@
 				8625B18D1C2596E20064B09B /* FromJSONMapTests.swift */,
 				8625B18E1C2596E20064B09B /* ToJSONMapTests.swift */,
 				D38A96601C3ABC500034A291 /* JSONRepresentableTests.swift */,
+				86F9C7871C3EC09600F5DD66 /* DictionaryMapperTests.swift */,
+				86F207CD1C3EFF6100F3CEFF /* CollectionTransformsTests.swift */,
 				8625B1781C2596C20064B09B /* Info.plist */,
 			);
 			path = PichiTests;
@@ -254,8 +260,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86F207CE1C3EFF6100F3CEFF /* CollectionTransformsTests.swift in Sources */,
 				D38A96611C3ABC500034A291 /* JSONRepresentableTests.swift in Sources */,
 				8625B18F1C2596E20064B09B /* FromJSONMapTests.swift in Sources */,
+				86F9C7881C3EC09600F5DD66 /* DictionaryMapperTests.swift in Sources */,
 				8625B1901C2596E20064B09B /* ToJSONMapTests.swift in Sources */,
 				86E5A70D1C28937A00DB061E /* Model.swift in Sources */,
 			);
