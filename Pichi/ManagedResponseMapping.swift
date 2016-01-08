@@ -82,5 +82,47 @@ public class ManagedObjectTransform<N where N: NSManagedObject, N:CoreDataMappab
         return object
     }
     
+    override public func transformFromJSON(value: JSON?) -> N? {
+        defer {
+            saveContext()
+        }
+        return super.transformFromJSON(value)
+    }
+    
+    private func saveContext() -> Bool {
+        guard let context = context else {
+            return false
+        }
+        var localError: NSError? = nil
+        if context.insertedObjects.count > 0 {
+            context.performBlockAndWait() {
+                do {
+                    try context.obtainPermanentIDsForObjects(Array(context.insertedObjects))
+                } catch let err as NSError {
+                    localError = err
+                }
+            }
+        }
+        
+        if localError != nil {
+            return false
+        }
+        
+        context.performBlockAndWait() {
+            do {
+                try context.save()
+            } catch let err as NSError {
+                localError = err
+            }
+        }
+        
+        if localError != nil {
+            print("Error during mapping \(localError)")
+            return false
+        }
+        
+        
+        return true
+    }
 }
 

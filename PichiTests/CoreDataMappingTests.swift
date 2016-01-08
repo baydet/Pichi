@@ -28,6 +28,7 @@ class CoreDataMapperTests: XCTestCase {
         
         let model = NSManagedObjectModel(contentsOfURL: bundle.URLForResource("Model", withExtension: "momd")!)!
         let storeCoordinator: NSPersistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
+        try! storeCoordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
         context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
         context.persistentStoreCoordinator = storeCoordinator
     }
@@ -37,8 +38,7 @@ class CoreDataMapperTests: XCTestCase {
     }
     
     func testCoreDataMapping() {
-        let mapping = ManagedObjectTransform<ManagedData>(mapFunction:
-            managedMapping, context: context)
+        let mapping = ManagedObjectTransform<ManagedData>(mapFunction: managedMapping, context: context)
         XCTAssertNil(mapping.transformFromJSON(nil))
         let test = mapping.transformFromJSON(testJSON)
         XCTAssertEqual(test?.text, "test")
