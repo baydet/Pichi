@@ -19,7 +19,7 @@ public struct UniqueAttribute {
 }
 
 
-public protocol CoreDataMappable: Mappable {
+public protocol CoreDataMappable: class, Mappable {
     static func identificationAttributes() -> [UniqueAttribute]
     static func predicate(attribute: UniqueAttribute, map: FromJSONMap) -> NSPredicate?
 }
@@ -29,24 +29,19 @@ public extension CoreDataMappable where Self: NSManagedObject {
         return []
     }
     
-    init<T:Map>(_ map: T) throws {
-        throw NSError(domain: "com.baydet.pichi", code: 0, userInfo: [NSLocalizedDescriptionKey : "unable to init NSManagedObject with init(_ map: T)"])
+    static func predicate(attribute: UniqueAttribute, map: FromJSONMap) -> NSPredicate? {
+        return defaultPredicate(attribute, map: map)
     }
+
 }
 
-//public func defaultPredicate(attribute: UniqueAttribute, map: ObjectMapper.Map) -> NSPredicate? {
-//    let value: AnyObject? = map[attribute.jsonKey].value()
-//    guard let str = value else {
-//        return nil
-//    }
-//    return NSPredicate(format: "\(attribute.modelKey) == \(str)")
-//}
-//
-//public extension CoreDataMappable {
-//    static func predicate(attribute: UniqueAttribute, map: ObjectMapper.Map) -> NSPredicate? {
-//        return defaultPredicate(attribute, map: map)
-//    }
-//}
+public func defaultPredicate(attribute: UniqueAttribute, map: FromJSONMap) -> NSPredicate? {
+    let value: AnyObject? = map[attribute.jsonKey].value()
+    guard let str = value else {
+        return nil
+    }
+    return NSPredicate(format: "\(attribute.modelKey) == \(str)")
+}
 
 
 public class ManagedObjectTransform<N where N: NSManagedObject, N:CoreDataMappable>: ResponseMapping<N> {
