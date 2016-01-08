@@ -18,12 +18,16 @@ public class ResponseMapping<N:Mappable>: DictionaryMapping {
     
     public let mapFunction: MappingFunction
     
+    internal func createObject(map: FromJSONMap) -> Object? {
+        return try? N(map)
+    }
+    
     public func transformFromJSON(value: JSON?) -> Object? {
         guard let json = value else {
             return nil
         }
         let fromJSONMap = FromJSONMap(json)
-        guard var object = try? N(fromJSONMap) else {
+        guard var object = createObject(fromJSONMap) else {
             return nil
         }
         self.mapFunction(&object, fromJSONMap)
