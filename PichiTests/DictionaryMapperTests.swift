@@ -1,5 +1,5 @@
 //
-//  RequestMapperTests.swift
+//  RequestDictionaryMappingTests.swift
 //  Pichi
 //
 //  Created by Alexandr Evsyuchenya on 1/7/16.
@@ -13,12 +13,10 @@ func mapping<M: Map>(inout test: Test, map: M) {
     test.string <-> map["string"]
 }
 
-let testJSON = ["string" : "test"]
+class RequestDictionaryMappingTests: XCTestCase {
 
-class RequestMapperTests: XCTestCase {
-
-    func testRequestMapper() {
-        let requestMapper = RequestMapper<Test>(mapFunction: mapping)
+    func testRequestDictionaryMapping() {
+        let requestMapper = RequestDictionaryMapping<Test>(mapFunction: mapping)
         XCTAssertNil(requestMapper.transformToJSON(nil))
         
         let test = Test(value: "test")
@@ -27,7 +25,7 @@ class RequestMapperTests: XCTestCase {
     }
     
     func testResponseMapper() {
-        let responseMapper = ResponseMapping<Test>(mapFunction: mapping)
+        let responseMapper = ResponseDictionaryMapping<Test>(mapFunction: mapping)
         XCTAssertNil(responseMapper.transformFromJSON(nil))
         let test = responseMapper.transformFromJSON(testJSON)
         XCTAssertEqual(test?.string, "test")

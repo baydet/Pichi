@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		8625B16B1C2596C20064B09B /* Pichi.h in Headers */ = {isa = PBXBuildFile; fileRef = 8625B16A1C2596C20064B09B /* Pichi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8625B1721C2596C20064B09B /* Pichi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8625B1671C2596C20064B09B /* Pichi.framework */; };
-		8625B1871C2596D40064B09B /* ResponseMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1811C2596D40064B09B /* ResponseMapping.swift */; };
-		8625B1881C2596D40064B09B /* RequestMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1821C2596D40064B09B /* RequestMapping.swift */; };
+		8625B1871C2596D40064B09B /* ResponseDictionaryMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1811C2596D40064B09B /* ResponseDictionaryMapping.swift */; };
+		8625B1881C2596D40064B09B /* RequestDictionaryMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1821C2596D40064B09B /* RequestDictionaryMapping.swift */; };
 		8625B1891C2596D40064B09B /* ManagedResponseMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1831C2596D40064B09B /* ManagedResponseMapping.swift */; };
 		8625B18A1C2596D40064B09B /* JSONRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1841C2596D40064B09B /* JSONRepresentable.swift */; };
 		8625B18B1C2596D40064B09B /* FromJSONMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625B1851C2596D40064B09B /* FromJSONMap.swift */; };
@@ -49,8 +49,8 @@
 		8625B16C1C2596C20064B09B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8625B1711C2596C20064B09B /* PichiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PichiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8625B1781C2596C20064B09B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8625B1811C2596D40064B09B /* ResponseMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMapping.swift; sourceTree = "<group>"; };
-		8625B1821C2596D40064B09B /* RequestMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestMapping.swift; sourceTree = "<group>"; };
+		8625B1811C2596D40064B09B /* ResponseDictionaryMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseDictionaryMapping.swift; sourceTree = "<group>"; };
+		8625B1821C2596D40064B09B /* RequestDictionaryMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestDictionaryMapping.swift; sourceTree = "<group>"; };
 		8625B1831C2596D40064B09B /* ManagedResponseMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedResponseMapping.swift; sourceTree = "<group>"; };
 		8625B1841C2596D40064B09B /* JSONRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRepresentable.swift; sourceTree = "<group>"; };
 		8625B1851C2596D40064B09B /* FromJSONMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromJSONMap.swift; sourceTree = "<group>"; };
@@ -117,8 +117,8 @@
 			children = (
 				D386274F1C3FA0B500CF877A /* CoreData */,
 				8625B1941C25973E0064B09B /* Map.swift */,
-				8625B1811C2596D40064B09B /* ResponseMapping.swift */,
-				8625B1821C2596D40064B09B /* RequestMapping.swift */,
+				8625B1811C2596D40064B09B /* ResponseDictionaryMapping.swift */,
+				8625B1821C2596D40064B09B /* RequestDictionaryMapping.swift */,
 				8625B1841C2596D40064B09B /* JSONRepresentable.swift */,
 				8625B1851C2596D40064B09B /* FromJSONMap.swift */,
 				8625B1861C2596D40064B09B /* ToJSONMap.swift */,
@@ -277,11 +277,11 @@
 				D3605FD61C3BF8B9005F5AA1 /* CollectionTransforms.swift in Sources */,
 				8625B18A1C2596D40064B09B /* JSONRepresentable.swift in Sources */,
 				8625B1891C2596D40064B09B /* ManagedResponseMapping.swift in Sources */,
-				8625B1881C2596D40064B09B /* RequestMapping.swift in Sources */,
+				8625B1881C2596D40064B09B /* RequestDictionaryMapping.swift in Sources */,
 				8625B1951C25973E0064B09B /* Map.swift in Sources */,
 				D38627561C3FA18A00CF877A /* NSManagedObjectContext+Ext.swift in Sources */,
 				8625B18C1C2596D40064B09B /* ToJSONMap.swift in Sources */,
-				8625B1871C2596D40064B09B /* ResponseMapping.swift in Sources */,
+				8625B1871C2596D40064B09B /* ResponseDictionaryMapping.swift in Sources */,
 				8625B18B1C2596D40064B09B /* FromJSONMap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

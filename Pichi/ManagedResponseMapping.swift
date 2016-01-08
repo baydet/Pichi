@@ -1,5 +1,5 @@
 //
-//  ManagedResponseMapping.swift
+//  ManagedResponseDictionaryMapping.swift
 //  Pichi
 //
 //  Created by Alexander Evsyuchenya on 12/18/15.
@@ -16,8 +16,12 @@ public struct UniqueAttribute {
         self.modelKey = modelKey
         self.jsonKey = jsonKey
     }
+    
+    public init(key: String) {
+        self.modelKey = key
+        self.jsonKey = key
+    }
 }
-
 
 public protocol CoreDataMappable: class, Mappable {
     static func identificationAttributes() -> [UniqueAttribute]
@@ -44,7 +48,7 @@ public func defaultPredicate(attribute: UniqueAttribute, map: FromJSONMap) -> NS
 }
 
 
-public class ManagedObjectTransform<N where N: NSManagedObject, N:CoreDataMappable>: ResponseMapping<N> {
+public class ManagedObjectTransform<N where N: NSManagedObject, N:CoreDataMappable>: ResponseDictionaryMapping<N> {
     private let context: NSManagedObjectContext?
     
     required public init(mapFunction: MappingFunction, context: NSManagedObjectContext?) {

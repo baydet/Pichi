@@ -10,6 +10,14 @@ import XCTest
 import CoreData
 @testable import Pichi
 
+func managedMapping<M: Map>(inout test: ManagedData, map: M) {
+    test.text <-> map["string"]
+}
+
+func managedUniqueMapping<M: Map>(inout test: UniqueData, map: M) {
+    test.identifier <-> map["identifier"]
+}
+
 
 class CoreDataMapperTests: XCTestCase {
     var context: NSManagedObjectContext!
@@ -29,29 +37,27 @@ class CoreDataMapperTests: XCTestCase {
     }
     
     func testCoreDataMapping() {
-//        guard let object: ManagedData = context.insert() else {
-//            return
-//        }
-//        object.text = "test"
-//        object.identifier = 13
-//        let mapper = CoreDataMapper<ManagedData>(context: context)
-//        let json = mapper.mapToJSON(object)!
-//        let mappedObject = try! mapper.mapToObject(json) as! ManagedData
-//        XCTAssertEqual(mappedObject.identifier, object.identifier)
-//        XCTAssertEqual(mappedObject.text, object.text)
-//        XCTAssertEqual(context.find(entityType: ManagedData.self).count, 2)
+        let mapping = ManagedObjectTransform<ManagedData>(mapFunction:
+            managedMapping, context: context)
+        XCTAssertNil(mapping.transformFromJSON(nil))
+        let test = mapping.transformFromJSON(testJSON)
+        XCTAssertEqual(test?.text, "test")
+        
+        let nilMapping = ManagedObjectTransform<ManagedData>(mapFunction:
+            managedMapping, context: nil)
+        XCTAssertNil(nilMapping.transformFromJSON(testJSON))
     }
     
     func testUniqueCoreDataMapping() {
-//        let mapper = CoreDataMapper<UniqueData>(context: context)
-//        let object = try! mapper.mapToObject(["id" : 13]) as! UniqueData
-//        XCTAssertEqual(context.find(entityType: UniqueData.self).count, 1)
-//        
-//        let json = mapper.mapToJSON(object)!
-//        let mappedObject = try! mapper.mapToObject(json) as! UniqueData
-//        XCTAssertEqual(mappedObject.identifier, object.identifier)
-//        
-//        XCTAssertEqual(context.find(entityType: UniqueData.self).count, 1)
+        let mapping = ManagedObjectTransform<UniqueData>(mapFunction:
+            managedUniqueMapping, context: context)
+        let json = ["identifier" : 13]
+
+        let _ = mapping.transformFromJSON(json)
+        XCTAssertEqual(context.find(entityType: UniqueData.self).count, 1)
+
+        let _ = mapping.transformFromJSON(json)
+        XCTAssertEqual(context.find(entityType: UniqueData.self).count, 1)
     }
     
     func testDeleteOrphanedObjects() {

@@ -1,5 +1,5 @@
 //
-//  ResponseMappingTests.swift
+//  ResponseDictionaryMappingTests.swift
 //  Pichi
 //
 //  Created by Alexander Evsyuchenya on 12/18/15.

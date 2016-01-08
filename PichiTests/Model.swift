@@ -8,10 +8,7 @@
 
 import Pichi
 
-enum EnumKey: String {
-    case One = "one"
-    case Two = "two"
-}
+let testJSON = ["string" : "test"]
 
 struct Test: Mappable {
     var string: String = ""
@@ -23,10 +20,6 @@ struct Test: Mappable {
     var array: [String] = []
     var optArray: [String]? = []
     var impArray: [String]! = []
-    
-    var enumKey: EnumKey = .One
-    var optEnumKey: EnumKey? = nil
-    var impEnumKey: EnumKey! = nil
     
     init<T:Map>(_ map: T) {
         

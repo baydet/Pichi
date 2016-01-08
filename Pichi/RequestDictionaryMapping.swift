@@ -6,7 +6,7 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
-public final class RequestMapper<N:Mappable>: DictionaryMapping {
+public final class RequestDictionaryMapping<N:Mappable>: DictionaryMapping {
     public typealias MappingFunction = (inout Object, ToJSONMap) -> Void
     public typealias Object = N
     public typealias JSON = [String : AnyObject]
