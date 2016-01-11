@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/baydet/Pichi.svg?branch=master)](https://travis-ci.org/baydet/Pichi)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 # Pichi
 
 This is yet another look on the problem of mapping JSON to your app's model objects. It uses different ideas from 
