@@ -23,6 +23,7 @@
 		86F207CE1C3EFF6100F3CEFF /* CollectionTransformsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F207CD1C3EFF6100F3CEFF /* CollectionTransformsTests.swift */; };
 		86F9C7881C3EC09600F5DD66 /* DictionaryMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F9C7871C3EC09600F5DD66 /* DictionaryMapperTests.swift */; };
 		D3605FD61C3BF8B9005F5AA1 /* CollectionTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3605FD51C3BF8B9005F5AA1 /* CollectionTransforms.swift */; };
+		D370F3491C43E00900959E05 /* DictionaryMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D370F3481C43E00900959E05 /* DictionaryMapping.swift */; };
 		D38627561C3FA18A00CF877A /* NSManagedObjectContext+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38627521C3FA0ED00CF877A /* NSManagedObjectContext+Ext.swift */; };
 		D386275D1C3FAC5600CF877A /* ManagedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38627571C3FAC5600CF877A /* ManagedData.swift */; };
 		D386275E1C3FAC5600CF877A /* ManagedData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38627581C3FAC5600CF877A /* ManagedData+CoreDataProperties.swift */; };
@@ -63,6 +64,7 @@
 		86F207CD1C3EFF6100F3CEFF /* CollectionTransformsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTransformsTests.swift; sourceTree = "<group>"; };
 		86F9C7871C3EC09600F5DD66 /* DictionaryMapperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryMapperTests.swift; sourceTree = "<group>"; };
 		D3605FD51C3BF8B9005F5AA1 /* CollectionTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTransforms.swift; sourceTree = "<group>"; };
+		D370F3481C43E00900959E05 /* DictionaryMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryMapping.swift; sourceTree = "<group>"; };
 		D38627521C3FA0ED00CF877A /* NSManagedObjectContext+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Ext.swift"; sourceTree = "<group>"; };
 		D38627571C3FAC5600CF877A /* ManagedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedData.swift; sourceTree = "<group>"; };
 		D38627581C3FAC5600CF877A /* ManagedData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ManagedData+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				D386274F1C3FA0B500CF877A /* CoreData */,
 				8625B1941C25973E0064B09B /* Map.swift */,
+				D370F3481C43E00900959E05 /* DictionaryMapping.swift */,
 				8625B1811C2596D40064B09B /* ResponseDictionaryMapping.swift */,
 				8625B1821C2596D40064B09B /* RequestDictionaryMapping.swift */,
 				8625B1841C2596D40064B09B /* JSONRepresentable.swift */,
@@ -279,6 +282,7 @@
 				8625B1891C2596D40064B09B /* ManagedResponseMapping.swift in Sources */,
 				8625B1881C2596D40064B09B /* RequestDictionaryMapping.swift in Sources */,
 				8625B1951C25973E0064B09B /* Map.swift in Sources */,
+				D370F3491C43E00900959E05 /* DictionaryMapping.swift in Sources */,
 				D38627561C3FA18A00CF877A /* NSManagedObjectContext+Ext.swift in Sources */,
 				8625B18C1C2596D40064B09B /* ToJSONMap.swift in Sources */,
 				8625B1871C2596D40064B09B /* ResponseDictionaryMapping.swift in Sources */,

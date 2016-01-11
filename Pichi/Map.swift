@@ -8,6 +8,13 @@
 
 infix operator <-> {}
 
+public protocol JSONBasicConvertable {
+    typealias JSON
+    var jsonValue: JSON { get }
+    init?(jsonObject: Any)
+    init?(_: JSON)
+}
+
 public protocol TransformType {
     typealias Object
     typealias JSON
@@ -30,31 +37,4 @@ public protocol Map {
     func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T, right: (Self, Transform))
     func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T?, right: (Self, Transform))
     func <-> <T, Transform: TransformType where Transform.Object == T>(inout left: T!, right: (Self, Transform))
-}
-
-/**
- *  Defines object that could be mapped to/from JSON
- */
-public protocol Mappable {
-	init<T:Map>(_ map: T) throws
-}
-
-/**
- *  Root class for mapping
- */
-public protocol DictionaryMapping: TransformType {
-    typealias MappingFunction = (inout Object, Map) -> Void
-    var mapFunction: MappingFunction { get }
-    init(mapFunction:  MappingFunction)
-}
-
-public extension DictionaryMapping {
-    
-    func transformFromJSON(value: JSON?) -> Object? {
-        return nil
-    }
-    
-    func transformToJSON(value: Object?) -> JSON? {
-        return nil
-    }
 }

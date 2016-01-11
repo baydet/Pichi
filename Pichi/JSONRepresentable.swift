@@ -6,13 +6,6 @@
 //  Copyright © 2015 Alexander Evsyuchenya. All rights reserved.
 //
 
-public protocol JSONBasicConvertable {
-    typealias JSON
-    var jsonValue: JSON { get }
-    init?(jsonObject: Any)
-    init?(_: JSON)
-}
-
 public extension JSONBasicConvertable {
     init?(jsonObject: Any) {
         if let value = jsonObject as? JSON {
