@@ -17,7 +17,7 @@ public protocol Mappable {
  *
  */
 public protocol DictionaryMapping: TransformType {
-    typealias MappingFunction = (inout Object, Map) -> Void
+    associatedtype MappingFunction = (inout Object, Map) -> Void
     var mapFunction: MappingFunction { get }
     init(mapFunction:  MappingFunction)
 }

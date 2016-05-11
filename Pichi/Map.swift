@@ -9,15 +9,15 @@
 infix operator <-> {}
 
 public protocol JSONBasicConvertable {
-    typealias JSON
+    associatedtype JSON
     var jsonValue: JSON { get }
     init?(jsonObject: Any)
     init?(_: JSON)
 }
 
 public protocol TransformType {
-    typealias Object
-    typealias JSON
+    associatedtype Object
+    associatedtype JSON
     
     func transformFromJSON(value: JSON?) -> Object?
     func transformToJSON(value: Object?) -> JSON?
